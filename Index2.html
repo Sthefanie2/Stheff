@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Nova - Cuidado Integral de Mascotas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #1a3d6d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    section {
+      padding: 40px;
+      text-align: center;
+    }
+    .servicios {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    footer {
+      background-color: #1a3d6d;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pet Nova</h1>
+    <p>Cuidado Integral de Mascotas</p>
+  </header>
+
+  <section>
+    <h2>Nuestros Servicios</h2>
+    <div class="servicios">
+      <div class="card">
+        <img src="img/veterinaria.jpg" alt="Veterinaria">
+        <h3>Atención Veterinaria</h3>
+        <p>Consulta general, vacunas y emergencias para tu mascota.</p>
+      </div>
+      <div class="card">
+        <img src="img/estetica.jpg" alt="Estética">
+        <h3>Estética Canina</h3>
+        <p>Baños, cortes y cuidado estético especializado.</p>
+      </div>
+      <div class="card">
+        <img src="img/accesorios.jpg" alt="Accesorios">
+        <h3>Accesorios</h3>
+        <p>Collares, juguetes y productos de calidad para tu mascota.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Pet Nova - Todos los derechos reservados</p>
+  </footer>
+</body>
+</html>
