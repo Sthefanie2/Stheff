@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debts & Payments</title>
+    
+</head>
+
+<body>
+   <!--Barra de navegación-->
+    <header class="navbar">
+        <div class="logo">>
+ FIA<span>O</span>
+        </div>
+ 
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="deudas.html" class="activo">Credit</a>
+            <a href="productos.html">Products</a>
+            <a href="clientes.html">Clients</a>
+            <a href="reportes.html">Reports</a>
+            <a href="contacto.html">Contact</a>
+        </nav>
+    </header>
+    <!--Barra de opciones-->
+    <section class="toolbar">
+
+        <button id="btnNotificaciones">
+            🔔
+        </button>
+
+        <button id="btnIdioma">
+            🌐 ES
+        </button>
+
+        <button id="btnTema">
+            🌙
+        </button>
+
+    </section>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="deudas-container">
+
+        <section class="titulo">
+
+            <h1>
+                Debts <span>&</span> Payments
+            </h1>
+
+            <p>
+                Manage customer debts, register payments,
+                and track balances easily.
+            </p>
+
+        </section>
+
+
+        <!-- GRID PRINCIPAL -->
+        <div class="dashboard-grid">
+
+
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="columna-izquierda">
+
+                <!-- SELECCIONAR CLIENTE -->
+                <section class="card cliente-selector">
+
+                    <label for="cliente">
+                        👤 Select a Customer
+                    </label>
+
+                    <select id="cliente">
+
+                        <option value="ramon">
+                            Ramón Batista
+                        </option>
+
+                        <option value="carlos">
+                            Carlos Gómez
+                        </option>
+
+                        <option value="ana">
+                            Ana Martínez
+                        </option>
+
+                    </select>
+
+                </section>
+
+
+                <!-- INFORMACION DEL CLIENTE -->
+                <section class="card informacion-cliente">
+
+                    <h2>
+                        👤 <span id="nombreCliente">
+                            Ramón Batista
+                        </span>
+                    </h2>
+
+                    <div class="estadisticas">
+
+                        <div class="stat">
+
+                            <small>
+                                Current Debt
+                            </small>
+
+                            <strong id="deudaActual">
+                                B/. 35.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <small>
+                                Credit Limit
+                            </small>
+
+                            <strong id="limiteCredito">
+                                B/. 100.00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BARRA DE DEUDA -->
+                    <div class="deuda-progress">
+
+                        <div class="progress">
+
+                            <div
+                                id="barraDeuda"
+                                class="progress-bar">
+                            </div>
+
+                        </div>
+
+                        <div class="progress-info">
+
+                            <span id="porcentajeDeuda">
+                                35% used
+                            </span>
+
+                            <span>
+                                Limit: B/. 100.00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- HISTORIAL -->
+            <section class="card historial">
+
+                <h2>
+                    Debt History
+                </h2>
+
+                <p>
+                    Track all purchases and payments.
+                </p>
+
+
+                <div id="listaHistorial">
+
+                    <!-- JavaScript colocará aquí
+                         los movimientos -->
+
+                </div>
+
+
+                <button
+                    class="link-button"
+                    id="verHistorial">
+
+                    View Full History →
+
+                </button>
+
+            </section>
+
+
+            <!-- ACTIVIDAD RECIENTE -->
+            <section class="card actividad">
+
+                <h2>
+                    Recent Activity
+                </h2>
+
+
+                <div id="actividadLista">
+
+                    <!-- JavaScript -->
+
+                </div>
+
+
+                <button
+                    class="link-button"
+                    id="verActividad">
+
+                    View all activity →
+
+                </button>
+
+            </section>
+
+
+            <!-- RESUMEN -->
+            <section class="card resumen">
+
+                <h2>
+                    Debt Overview
+                </h2>
+
+
+                <div class="overview-grid">
+
+                    <div>
+                        <small>
+                            Outstanding Debt
+                        </small>
+
+                        <strong id="deudaTotal">
+                            B/. 35.00
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <small>
+                            Payments Today
+                        </small>
+
+                        <strong id="pagosHoy">
+                            B/. 20.00
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/deudas.js"></script>
+
+</body>
+
+</html>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </html>
