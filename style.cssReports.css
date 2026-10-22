@@ -1,0 +1,581 @@
+
+/* =====================================
+   FIA'O - MAIN COLORS
+===================================== */
+:root {
+    --red: #BF2529;
+    --red-dark: #A91E23;
+    --yellow: #FFC928;
+    --yellow-hover: #FFB91C;
+    --cream: #FFF2D4;
+    --cream-shape: #FFDF96;
+    --white: #FFFFFF;
+    --text: #17212B;
+    --muted: #626873;
+    --border: #D8D8D8;
+    --green: #247A3B;
+    --error: #C52128;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    font-size: 14px;
+}
+
+/* =====================================
+   NAVIGATION BAR
+===================================== */
+.navbar {
+    min-height: 60px;
+    margin: 8px 12px 26px;
+    padding: 8px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: var(--red);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 38px;
+    font-weight: 750;
+    letter-spacing: -2px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--yellow);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(12px, 3vw, 44px);
+}
+
+.nav-button {
+    padding: 8px 17px;
+    background: var(--yellow);
+    color: #171717;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 25px;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.nav-button:hover,
+.nav-button.active {
+    background: #FFDA55;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+/* =====================================
+   MAIN LAYOUT
+===================================== */
+.main-container {
+    width: min(1456px, calc(100% - 8.2%));
+    min-height: 680px;
+    margin: 0 auto;
+    padding: 0 clamp(30px, 6.5vw, 100px);
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr)
+                           minmax(360px, 0.92fr);
+    align-items: center;
+    gap: clamp(35px, 5vw, 80px);
+
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-section,
+.form-card {
+    position: relative;
+    z-index: 2;
+}
+
+/* =====================================
+   LEFT INTRODUCTION
+===================================== */
+.intro-section {
+    max-width: 560px;
+    padding: 45px 0;
+}
+
+.intro-logo {
+    color: var(--red);
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+}
+
+.intro-section h1 {
+    font-size: clamp(32px, 2.2vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+}
+
+.intro-section h1 span {
+    color: var(--red);
+}
+
+.intro-description {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    align-items: start;
+    margin: 0 0 28px -32px;
+}
+
+.intro-description p {
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.dots {
+    color: var(--yellow-hover);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: 2px;
+}
+
+/* =====================================
+   BENEFITS
+===================================== */
+.benefits {
+    display: grid;
+    gap: 21px;
+}
+
+.benefit {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 13px;
+    align-items: start;
+}
+
+.benefit-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    color: var(--red);
+    font-size: 29px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.benefit h3 {
+    font-size: 14px;
+    margin: 1px 0 4px;
+}
+
+.benefit p {
+    font-size: 12px;
+    color: #444B55;
+    line-height: 1.5;
+}
+
+/* =====================================
+   REGISTRATION CARD
+===================================== */
+.form-card {
+    width: 100%;
+    max-width: 470px;
+    justify-self: center;
+    margin: 40px 0 30px;
+    padding: 35px 36px 26px;
+    background: var(--white);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(39, 29, 10, 0.08);
+}
+
+.form-card > h2 {
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+/* =====================================
+   FORM FIELDS
+===================================== */
+.form-group {
+    min-width: 0;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    display: block;
+    width: 100%;
+    height: 39px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #7A8088;
+}
+
+.form-group input:focus {
+    border-color: var(--yellow-hover);
+    box-shadow: 0 0 0 3px rgba(255, 185, 28, 0.2);
+}
+
+.form-group input.invalid {
+    border-color: var(--error);
+}
+
+.password-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 48px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #555;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.error {
+    display: block;
+    color: var(--error);
+    font-size: 11px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.error:empty {
+    display: none;
+}
+
+/* =====================================
+   TERMS AND SUBMIT BUTTON
+===================================== */
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 2px 0;
+    color: #4C535C;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.terms input {
+    margin-top: 2px;
+    accent-color: var(--red);
+}
+
+.submit-button {
+    width: 100%;
+    min-height: 39px;
+    margin-top: 14px;
+    border: none;
+    border-radius: 6px;
+    background: var(--yellow-hover);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.submit-button:hover {
+    background: #F5A900;
+    transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+.form-message {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-message.success {
+    color: var(--green);
+}
+
+.form-message.failure {
+    color: var(--error);
+}
+
+.login-text {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 11px;
+    color: #5E6268;
+}
+
+.login-text a {
+    color: var(--red);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+/* =====================================
+   DECORATIVE GEOMETRIC SHAPES
+===================================== */
+.shape {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shape-top {
+    width: 200px;
+    height: 380px;
+    right: 0;
+    top: 0;
+    background: var(--cream-shape);
+    border-radius: 0 0 0 195px;
+}
+
+.shape-bottom {
+    width: 250px;
+    height: 250px;
+    left: -125px;
+    bottom: -132px;
+    background: #B82025;
+    border-radius: 50%;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+.footer {
+    width: min(1456px, calc(100% - 8.2%));
+    margin: 14px auto 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: #777;
+    font-size: 11px;
+}
+
+/* =====================================
+   TABLETS
+===================================== */
+@media (max-width: 1050px) {
+    .navbar {
+        padding: 8px 20px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-button {
+        padding: 8px 12px;
+    }
+
+    .main-container {
+        width: calc(100% - 36px);
+        padding: 0 38px;
+        gap: 30px;
+        grid-template-columns: minmax(0, 1fr)
+                               minmax(320px, 0.95fr);
+    }
+
+    .form-card {
+        padding: 30px 26px 24px;
+    }
+
+    .intro-description {
+        margin-left: 0;
+    }
+}
+
+/* =====================================
+   MOBILE PHONES
+===================================== */
+@media (max-width: 760px) {
+    .navbar {
+        margin: 8px 10px 18px;
+        padding: 10px 17px;
+        min-height: 58px;
+    }
+
+    .logo {
+        font-size: 33px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 7px);
+        left: 0;
+        right: 0;
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        background: var(--red);
+        border-radius: 10px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-button {
+        text-align: center;
+    }
+
+    .main-container {
+        width: calc(100% - 20px);
+        padding: 28px 20px 34px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .intro-section {
+        padding: 15px 0 0;
+    }
+
+    .intro-logo {
+        margin-bottom: 20px;
+    }
+
+    .intro-section h1 {
+        font-size: 33px;
+    }
+
+    .benefits {
+        gap: 16px;
+    }
+
+    .form-card {
+        margin: 14px auto 0;
+        padding: 27px 22px 22px;
+    }
+
+    .shape-top {
+        width: 110px;
+        height: 210px;
+        opacity: 0.7;
+    }
+
+    .shape-bottom {
+        width: 155px;
+        height: 155px;
+        left: -90px;
+        bottom: -90px;
+    }
+
+    .footer {
+        width: calc(100% - 28px);
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 420px) {
+    .main-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .form-card {
+        padding: 24px 17px 20px;
+        border-radius: 17px;
+    }
+
+    .form-card > h2 {
+        font-size: 20px;
+    }
+
+    .password-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .footer {
+        flex-direction: column;
+    }
+}
