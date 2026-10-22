@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIA'O | Create your account</title>
+    <link rel="stylesheet" href="style.cssRepo">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <header class="navbar">
+        <a href="#home" class="logo">FIA<span>'O</span></a>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Open navigation" aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home" class="nav-button active">Home</a>
+            <a href="#credit" class="nav-button">Credit</a>
+            <a href="#products" class="nav-button">Products</a>
+            <a href="#clients" class="nav-button">Clients</a>
+            <a href="#reports" class="nav-button">Reports</a>
+            <a href="#contact" class="nav-button">Contact</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container" id="home">
+
+        <!-- LEFT INFORMATION SECTION -->
+        <section class="intro-section">
+            <h2 class="intro-logo">FIA'O</h2>
+
+            <h1>Sign up for<br><span>free</span></h1>
+
+            <div class="intro-description">
+                <div class="dots" aria-hidden="true">••<br>••<br>••<br>••</div>
+                <p>
+                    Create your account on FIA'O and start managing
+                    your credit sales easily, securely, and in an
+                    organized way.
+                </p>
+            </div>
+
+            <div class="benefits">
+
+                <article class="benefit">
+                    <div class="benefit-icon">♙</div>
+                    <div>
+                        <h3>Fast &amp; Easy</h3>
+                        <p>Create your account in just a few minutes
+                           and start using the platform.</p>
+                    </div>
+                </article>
+
+                <article class="benefit">
+                    <div class="benefit-icon">⬟</div>
+                    <div>
+                        <h3>Secure</h3>
+                        <p>We protect your business and customer
+                           information.</p>
+                    </div>
+                </article>
+
+                <article class="benefit">
+                    <div class="benefit-icon">☁</div>
+                    <div>
+                        <h3>Cloud-Based</h3>
+                        <p>Access your information anytime, anywhere,
+                           from any device.</p>
+                    </div>
+                </article>
+
+                <article class="benefit">
+                    <div class="benefit-icon">▥</div>
+                    <div>
+                        <h3>Greater Control</h3>
+                        <p>Keep track of your debits and business
+                           growth seamlessly.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- REGISTRATION FORM -->
+        <section class="form-card">
+            <h2>Create your account</h2>
+            <p class="form-subtitle">Complete the form to get started</p>
+
+            <form id="signupForm" novalidate>
+
+                <div class="form-group">
+                    <label for="fullName">Full name *</label>
+                    <input type="text" id="fullName"
+                           placeholder="Add your name"
+                           autocomplete="name" required>
+                    <small class="error" id="fullNameError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email"
+                           placeholder="Add your email"
+                           autocomplete="email" required>
+                    <small class="error" id="emailError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone"
+                           placeholder="Add your number"
+                           autocomplete="tel" required>
+                    <small class="error" id="phoneError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="businessName">Business Name *</label>
+                    <input type="text" id="businessName"
+                           placeholder="E.g. Doña Carmen's Store"
+                           autocomplete="organization" required>
+                    <small class="error" id="businessNameError"></small>
+                </div>
+
+                <div class="password-row">
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="password-container">
+                            <input type="password" id="password"
+                                   placeholder="Add your password"
+                                   autocomplete="new-password" required>
+                            <button type="button" class="toggle-password"
+                                    data-target="password">Show</button>
+                        </div>
+                        <small class="error" id="passwordError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <div class="password-container">
+                            <input type="password" id="confirmPassword"
+                                   placeholder="Confirm"
+                                   autocomplete="new-password" required>
+                            <button type="button" class="toggle-password"
+                                    data-target="confirmPassword">Show</button>
+                        </div>
+                        <small class="error" id="confirmPasswordError"></small>
+                    </div>
+                </div>
+
+                <label class="terms">
+                    <input type="checkbox" id="terms">
+                    <span>I agree to the terms and privacy policy.</span>
+                </label>
+                <small class="error" id="termsError"></small>
+
+                <button type="submit" class="submit-button" id="submitButton">
+                    Create My Account
+                </button>
+
+                <p id="formMessage" class="form-message"
+                   role="status" aria-live="polite"></p>
+
+                <p class="login-text">
+                    Already have an account?
+                    <a href="#login" id="loginLink">Sign in</a>
+                </p>
+
+            </form>
+        </section>
+
+        <!-- DECORATIVE SHAPES -->
+        <div class="shape shape-top" aria-hidden="true"></div>
+        <div class="shape shape-bottom" aria-hidden="true"></div>
+
+    </main>
+
+    <footer class="footer" id="contact">
+        <p>FIA'O | Business tools made simpler.</p>
+        <p>&copy; <span id="year"></span> FIA'O</p>
+    </footer>
+
+</body>
+</html>
