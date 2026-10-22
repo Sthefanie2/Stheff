@@ -9,7 +9,9 @@
   --row-line: #EFE3B8;
   --row-hover: #FFFBEA;
   --avatar: #5A3A2A;
-  --input-bg: #FFFDF2;
+  --input-bg: #FFF6D8;
+  --search-border: #EBD58A;
+  --chip-bg: #FFFFFF;
 
   --ok-bg: #D6F0DC;   --ok-tx: #1E7B3C;
   --pend-bg: #FFEFB0; --pend-tx: #6B4A12;
@@ -25,7 +27,9 @@ body.dark {
   --row-line: #43342B;
   --row-hover: #35291F;
   --avatar: #FFC72C;
-  --input-bg: #231A16;
+  --input-bg: #2C211C;
+  --search-border: #5A4636;
+  --chip-bg: #231A16;
 
   --ok-bg: #1F4630;   --ok-tx: #8EE0A8;
   --pend-bg: #5A4616; --pend-tx: #FFE08A;
@@ -65,13 +69,21 @@ body {
   align-items: center;
   line-height: 1;
 }
-.apostrophe { font-size: 22px; align-self: flex-start; margin-top: 6px; }
+.apostrophe {
+  font-size: 20px;
+  color: var(--yellow);
+  align-self: flex-start;
+  margin: 4px 1px 0 2px;
+}
 .logo-o {
-  width: 34px; height: 34px;
+  display: inline-block;
+  width: 30px; height: 30px;
   border: 6px solid var(--yellow);
   border-radius: 50%;
   color: transparent;
-  margin-left: 2px;
+  overflow: hidden;
+  position: relative;
+  top: 1px;
 }
 .navbar nav {
   flex: 1;
@@ -81,19 +93,22 @@ body {
   margin-left: auto;
   margin-right: 100px;
 }
-.pill {
+.navbar nav a,
+.navbar nav a:link,
+.navbar nav a:visited {
   background: var(--yellow);
-  color: var(--brown);
+  color: #5A3A2A;
+  font-family: inherit;
   font-size: 11px;
   font-weight: 500;
+  line-height: 1.4;
   padding: 5px 14px;
   border-radius: 999px;
   text-decoration: none;
   transition: transform .15s, box-shadow .15s;
 }
-body.dark .pill { color: #3b2418; }
-.pill:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0, 0, 0, .25); }
-.pill.active { box-shadow: 0 0 0 2px #fff inset; }
+.navbar nav a:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0, 0, 0, .25); }
+.navbar nav a.active { box-shadow: 0 0 0 2px #fff inset; }
 
 /* ---------- Layout ---------- */
 .layout {
@@ -145,7 +160,7 @@ h2 { font-size: 17px; font-weight: 600; margin-top: 34px; }
 .search-box {
   display: flex; align-items: center; gap: 8px;
   background: var(--input-bg);
-  border: 1px solid var(--cream-border);
+  border: 1px solid var(--search-border);
   border-radius: 6px;
   padding: 0 12px;
   height: 33px;
@@ -162,8 +177,8 @@ h2 { font-size: 17px; font-weight: 600; margin-top: 34px; }
   font: inherit; font-size: 9.5px; font-weight: 600;
   padding: 5px 12px;
   border-radius: 999px;
-  border: 1px solid var(--cream-border);
-  background: var(--input-bg);
+  border: 1px solid var(--search-border);
+  background: var(--chip-bg);
   color: var(--brown);
   cursor: pointer;
   transition: background .15s, color .15s;
