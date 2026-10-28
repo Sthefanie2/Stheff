@@ -1,189 +1,163 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIA'O | Create your account</title>
-    <link rel="stylesheet" href="style.cssRepo">
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIA´O | Reports</title>
+ 
+  <!-- Fuente Poppins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+ 
+  <!-- Íconos Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ 
+  <link rel="stylesheet" href="reports.css">
 </head>
 <body>
-
-    <!-- NAVIGATION BAR -->
-    <header class="navbar">
-        <a href="#home" class="logo">FIA<span>'O</span></a>
-
-        <button class="menu-toggle" id="menuToggle"
-                aria-label="Open navigation" aria-expanded="false">
-            ☰
-        </button>
-
-        <nav class="nav-links" id="navLinks">
-            <a href="#home" class="nav-button active">Home</a>
-            <a href="#credit" class="nav-button">Credit</a>
-            <a href="#products" class="nav-button">Products</a>
-            <a href="#clients" class="nav-button">Clients</a>
-            <a href="#reports" class="nav-button">Reports</a>
-            <a href="#contact" class="nav-button">Contact</a>
-        </nav>
-    </header>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-container" id="home">
-
-        <!-- LEFT INFORMATION SECTION -->
-        <section class="intro-section">
-            <h2 class="intro-logo">FIA'O</h2>
-
-            <h1>Sign up for<br><span>free</span></h1>
-
-            <div class="intro-description">
-                <div class="dots" aria-hidden="true">••<br>••<br>••<br>••</div>
-                <p>
-                    Create your account on FIA'O and start managing
-                    your credit sales easily, securely, and in an
-                    organized way.
-                </p>
-            </div>
-
-            <div class="benefits">
-
-                <article class="benefit">
-                    <div class="benefit-icon">♙</div>
-                    <div>
-                        <h3>Fast &amp; Easy</h3>
-                        <p>Create your account in just a few minutes
-                           and start using the platform.</p>
-                    </div>
-                </article>
-
-                <article class="benefit">
-                    <div class="benefit-icon">⬟</div>
-                    <div>
-                        <h3>Secure</h3>
-                        <p>We protect your business and customer
-                           information.</p>
-                    </div>
-                </article>
-
-                <article class="benefit">
-                    <div class="benefit-icon">☁</div>
-                    <div>
-                        <h3>Cloud-Based</h3>
-                        <p>Access your information anytime, anywhere,
-                           from any device.</p>
-                    </div>
-                </article>
-
-                <article class="benefit">
-                    <div class="benefit-icon">▥</div>
-                    <div>
-                        <h3>Greater Control</h3>
-                        <p>Keep track of your debits and business
-                           growth seamlessly.</p>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- REGISTRATION FORM -->
-        <section class="form-card">
-            <h2>Create your account</h2>
-            <p class="form-subtitle">Complete the form to get started</p>
-
-            <form id="signupForm" novalidate>
-
-                <div class="form-group">
-                    <label for="fullName">Full name *</label>
-                    <input type="text" id="fullName"
-                           placeholder="Add your name"
-                           autocomplete="name" required>
-                    <small class="error" id="fullNameError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email"
-                           placeholder="Add your email"
-                           autocomplete="email" required>
-                    <small class="error" id="emailError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone"
-                           placeholder="Add your number"
-                           autocomplete="tel" required>
-                    <small class="error" id="phoneError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="businessName">Business Name *</label>
-                    <input type="text" id="businessName"
-                           placeholder="E.g. Doña Carmen's Store"
-                           autocomplete="organization" required>
-                    <small class="error" id="businessNameError"></small>
-                </div>
-
-                <div class="password-row">
-                    <div class="form-group">
-                        <label for="password">Password *</label>
-                        <div class="password-container">
-                            <input type="password" id="password"
-                                   placeholder="Add your password"
-                                   autocomplete="new-password" required>
-                            <button type="button" class="toggle-password"
-                                    data-target="password">Show</button>
-                        </div>
-                        <small class="error" id="passwordError"></small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password *</label>
-                        <div class="password-container">
-                            <input type="password" id="confirmPassword"
-                                   placeholder="Confirm"
-                                   autocomplete="new-password" required>
-                            <button type="button" class="toggle-password"
-                                    data-target="confirmPassword">Show</button>
-                        </div>
-                        <small class="error" id="confirmPasswordError"></small>
-                    </div>
-                </div>
-
-                <label class="terms">
-                    <input type="checkbox" id="terms">
-                    <span>I agree to the terms and privacy policy.</span>
-                </label>
-                <small class="error" id="termsError"></small>
-
-                <button type="submit" class="submit-button" id="submitButton">
-                    Create My Account
-                </button>
-
-                <p id="formMessage" class="form-message"
-                   role="status" aria-live="polite"></p>
-
-                <p class="login-text">
-                    Already have an account?
-                    <a href="#login" id="loginLink">Sign in</a>
-                </p>
-
-            </form>
-        </section>
-
-        <!-- DECORATIVE SHAPES -->
-        <div class="shape shape-top" aria-hidden="true"></div>
-        <div class="shape shape-bottom" aria-hidden="true"></div>
-
-    </main>
-
-    <footer class="footer" id="contact">
-        <p>FIA'O | Business tools made simpler.</p>
-        <p>&copy; <span id="year"></span> FIA'O</p>
-    </footer>
-
+ 
+  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
+<header class="navbar">
+<a href="index.html" class="navbar__logo">FIA<span>´O</span></a>
+ 
+    <nav class="navbar__menu">
+<a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
+<a href="credit.html" class="nav-link" data-i18n="nav_credit">Credit</a>
+<a href="products.html" class="nav-link" data-i18n="nav_products">Products</a>
+<a href="clients.html" class="nav-link" data-i18n="nav_clients">Clients</a>
+<a href="reports.html" class="nav-link active" data-i18n="nav_reports">Reports</a>
+<a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
+</nav>
+</header>
+ 
+  <main class="container">
+ 
+    <!-- ============ ENCABEZADO ============ -->
+<section class="page-header">
+<div>
+<div class="page-header__title">
+<i class="fa-solid fa-chart-pie title-icon"></i>
+<h1>FIA'O Reports</h1>
+<button class="icon-btn" id="langBtn" title="Language / Idioma"><i class="fa-solid fa-language"></i></button>
+<button class="icon-btn" id="themeBtn" title="Dark mode"><i class="fa-solid fa-moon"></i></button>
+</div>
+<p class="page-header__sub" data-i18n="subtitle">Financial tracking, credit summaries, and business analytics overview.</p>
+</div>
+ 
+      <div class="export-btns">
+<button class="btn-export" id="exportPdf"><i class="fa-solid fa-file-pdf pdf"></i> <span data-i18n="export_pdf">Export PDF</span></button>
+<button class="btn-export" id="exportExcel"><i class="fa-solid fa-file-excel xls"></i> <span data-i18n="export_excel">Export Excel</span></button>
+</div>
+</section>
+ 
+    <!-- ============ FILTROS ============ -->
+<section class="filters">
+<label class="filters__label" data-i18n="date_range">DATE RANGE</label>
+<div class="date-row">
+<div class="input-wrap">
+<i class="fa-solid fa-calendar left"></i>
+<input type="date" id="dateFrom" value="2026-07-01">
+</div>
+<span class="date-row__to" data-i18n="to">to</span>
+<div class="input-wrap">
+<input type="date" id="dateTo" value="2026-07-31">
+</div>
+</div>
+ 
+      <label class="filters__label" data-i18n="customer_status">CUSTOMER STATUS / NAME</label>
+<div class="input-wrap select-wrap">
+<i class="fa-solid fa-users left"></i>
+<select id="customerSelect">
+<option value="all" data-i18n="all_customers">All Customers (All Names)</option>
+</select>
+<i class="fa-solid fa-chevron-down right"></i>
+</div>
+ 
+      <button class="btn-apply" id="applyFilters"><i class="fa-solid fa-filter"></i> <span data-i18n="apply_filters">Apply Filters</span></button>
+</section>
+ 
+    <!-- ============ TARJETAS DE RESUMEN ============ -->
+<section class="cards">
+<article class="card">
+<div class="card__top">
+<span class="card__label" data-i18n="total_active">TOTAL ACTIVE CREDIT</span>
+<span class="card__icon gold"><i class="fa-solid fa-wallet"></i></span>
+</div>
+<h2 class="card__value" id="kpiActive">$1,450.00</h2>
+<p class="card__note up"><i class="fa-solid fa-arrow-up"></i> <span id="kpiActiveNote">+8.4% from last month</span></p>
+</article>
+ 
+      <article class="card">
+<div class="card__top">
+<span class="card__label" data-i18n="collected">COLLECTED THIS MONTH</span>
+<span class="card__icon green"><i class="fa-solid fa-circle-check"></i></span>
+</div>
+<h2 class="card__value" id="kpiCollected">$3,120.50</h2>
+<p class="card__note up"><i class="fa-solid fa-arrow-up"></i> <span id="kpiCollectedNote">+12.1% efficiency</span></p>
+</article>
+ 
+      <article class="card">
+<div class="card__top">
+<span class="card__label" data-i18n="pending">PENDING BALANCES</span>
+<span class="card__icon red"><i class="fa-solid fa-triangle-exclamation"></i></span>
+</div>
+<h2 class="card__value" id="kpiPending">$340.00</h2>
+<p class="card__note down"><i class="fa-solid fa-arrow-down"></i> <span id="kpiPendingNote">-3 accounts overdue</span></p>
+</article>
+ 
+      <article class="card">
+<div class="card__top">
+<span class="card__label" data-i18n="total_customers">TOTAL CUSTOMERS</span>
+<span class="card__icon blue"><i class="fa-solid fa-address-book"></i></span>
+</div>
+<h2 class="card__value" id="kpiCustomers">48</h2>
+<p class="card__note up"><i class="fa-solid fa-user-plus"></i> <span id="kpiCustomersNote">+5 new this month</span></p>
+</article>
+</section>
+ 
+    <!-- ============ GRÁFICAS ============ -->
+<section class="charts">
+<article class="panel">
+<h3 class="panel__title" data-i18n="activity_title">Credit Activity &amp; Payments Flow</h3>
+<ul class="legend">
+<li><span class="dot gold-bg"></span> <span data-i18n="credit_issued">Credit Issued</span></li>
+<li><span class="dot green-bg"></span> <span data-i18n="payments_received">Payments Received</span></li>
+<li><span class="dot red-bg"></span> <span data-i18n="overdue">Overdue</span></li>
+</ul>
+<div class="bar-chart" id="barChart"></div>
+</article>
+ 
+      <article class="panel">
+<h3 class="panel__title" data-i18n="status_title">Payment Status Breakdown</h3>
+<div class="status-list" id="statusList"></div>
+</article>
+</section>
+ 
+    <!-- ============ TABLA DE TRANSACCIONES ============ -->
+<section class="table-box">
+<h3 class="table-box__title" data-i18n="recent_title">Recent Credit Transactions</h3>
+ 
+      <div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th data-i18n="th_customer">Customer Name</th>
+<th data-i18n="th_description">Description</th>
+<th data-i18n="th_amount">Amount</th>
+<th data-i18n="th_date">Date</th>
+<th data-i18n="th_status">Status</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+ 
+      <div class="pagination" id="pagination"></div>
+</section>
+</main>
+ 
+  <script src="reports.js"></script>
 </body>
 </html>
+ 

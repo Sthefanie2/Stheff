@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIA´O | Log In</title>
+ 
+  <!-- Fuente Poppins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+ 
+ <link rel="stylesheet" href="Style.css login.css">
+</head>
+<body>
+ 
+  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
+<header class="navbar">
+<a href="Index 1 Fiao.html" class="navbar__logo">FIA<span>´O</span></a>
+ 
+    <nav class="navbar__menu">
+<a href="Index 1 Fiao.html" class="nav-link active">Home</a>
+<a href="Debts & Payments.html" class="nav-link">Credit</a>
+<a href="Products.html" class="nav-link">Products</a>
+<a href="Client.html" class="nav-link">Clients</a>
+<a href="reports.html" class="nav-link">Reports</a>
+<a href="contact.html" class="nav-link">Contact</a>
+</nav>
+</header>
+ 
+  <!-- ============ SECCIÓN PRINCIPAL ============ -->
+<main class="hero">
+<div class="shape shape--yellow"></div>
+<div class="shape shape--red"></div>
+ 
+    <!-- Lado izquierdo: información -->
+<section class="hero__info">
+<h2 class="brand">FIA<span>´</span>O</h2>
+ 
+      <h1 class="hero__title">
+
+        We are innovation with <br>
+<span>purpose</span>
+</h1>
+<p class="hero__subtitle">Technology at the service of small businesses</p>
+ 
+      <ul class="features">
+<li class="feature">
+<svg class="feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M3 3v18h18"/>
+<path d="M8 17v-4M12 17V9M16 17v-6M20 17v-9"/>
+</svg>
+<div>
+<h3>Total Control</h3>
+<p>Manage your inventory, sales, and debts all from one place</p>
+</div>
+</li>
+ 
+        <li class="feature">
+<svg class="feature__icon" viewBox="0 0 24 24" fill="currentColor">
+<path d="M12 2 3 5.5v6c0 5.2 3.6 9.9 9 11.5 5.4-1.6 9-6.3 9-11.5v-6L12 2Zm0 2.1 7 2.7v4.7c0 4.1-2.7 7.9-7 9.4V4.1Z"/>
+</svg>
+<div>
+<h3>More Security</h3>
+<p>Digitize the credit and keep track of your customers safely</p>
+</div>
+</li>
+ 
+        <li class="feature">
+<svg class="feature__icon" viewBox="0 0 24 24" fill="currentColor">
+<circle cx="12" cy="7" r="3.2"/>
+<circle cx="4.5" cy="9.5" r="2.2"/>
+<circle cx="19.5" cy="9.5" r="2.2"/>
+<path d="M12 11.5c-3.2 0-6 1.700-6 4.500V19h12v-3c0-2.800-2.800-4.500-6-4.500Z"/>
+<path d="M4.500 12.500C2.600 12.500 1 13.700 1 15.500V18h3.500v-2c0-1.300.5-2.500 1.400-3.300-.4-.1-.9-.2-1.400-.2Z"/>
+<path d="M19.500 12.500c1.900 0 3.500 1.200 3.500 3V18h-3.500v-2c0-1.300-.5-2.500-1.400-3.300.4-.1.900-.2 1.400-.2Z"/>
+</svg>
+<div>
+<h3>Better Relationships</h3>
+<p>Transparency and trust between you and your clients</p>
+</div>
+</li>
+</ul>
+</section>
+ 
+    <!-- Lado derecho: formulario de login -->
+<section class="login">
+<div class="login__card">
+<h2 class="login__title">Log In</h2>
+<p class="login__subtitle">Enter your credentials</p>
+ 
+        <form id="loginForm" novalidate>
+ 
+          <!-- Email -->
+<div class="field">
+<label for="email">Email</label>
+<div class="input-box">
+<svg class="input-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="m3 7 9 6 9-6"/>
+</svg>
+<input type="email" id="email" name="email" placeholder="example@domain.com" autocomplete="email">
+</div>
+<small class="error" id="emailError"></small>
+</div>
+ 
+          <!-- Password -->
+<div class="field">
+<label for="password">Password</label>
+<div class="input-box">
+<svg class="input-box__icon" viewBox="0 0 24 24" fill="currentColor">
+<path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM10 7a2 2 0 0 1 4 0v2h-4V7Z"/>
+</svg>
+<input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
+</div>
+<a href="#" class="forgot" id="forgotLink">You forgot your password?</a>
+<small class="error" id="passwordError"></small>
+</div>
+ 
+          <button type="submit" class="btn-login">Log In</button>
+ 
+          <!-- reCAPTCHA (visual). Para uno real, reemplaza este bloque por:
+<div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+
+               y agrega <script src="https://www.google.com/recaptcha/api.js"></script> -->
+<div class="captcha">
+<label class="captcha__check">
+<input type="checkbox" id="captcha">
+<span class="captcha__box"></span>
+<span class="captcha__text">I'm not a robot</span>
+</label>
+<div class="captcha__logo">
+<svg viewBox="0 0 24 24" width="26" height="26">
+<path fill="#1c6ff0" d="M12 2 4 5.500v6c0 4.900 3.400 9.300 8 10.500V2Z"/>
+<path fill="#2f86ff" d="M12 2v20c4.600-1.200 8-5.600 8-10.500v-6L12 2Z" opacity=".75"/>
+</svg>
+<span>reCAPTCHA</span>
+</div>
+</div>
+<small class="error" id="captchaError"></small>
+</form>
+ 
+        <p class="login__footer">Don't you have an account?</p>
+<a href="signup.html" class="login__signup" id="signupLink">Sign Up</a>
+</div>
+</section>
+</main>
+ 
+  <script src="javascript/login.js"></script>
+</body>
+</html>
+ 
