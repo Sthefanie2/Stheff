@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIA'O - Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo">FIA<span>'O</span></a>
+    <nav class="navbar__menu">
+      <a href="index.html" class="navbar__link">Home</a>
+      <a href="credit.html" class="navbar__link">Credit</a>
+      <a href="products.html" class="navbar__link">Products</a>
+      <a href="clients.html" class="navbar__link">Clients</a>
+      <a href="reports.html" class="navbar__link">Reports</a>
+      <a href="contact.html" class="navbar__link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="signup">
+
+    <div class="shape shape--yellow"></div>
+    <div class="shape shape--red"></div>
+
+    <!-- Lado izquierdo -->
+    <section class="signup__info">
+      <div class="signup__brand">FIA<span>'O</span></div>
+
+      <h1 class="signup__title">
+        Sign up for<br>
+        <span class="signup__title--accent">free</span>
+      </h1>
+
+      <div class="signup__dots">
+        <span></span><span></span>
+        <span></span><span></span>
+        <span></span><span></span>
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+
+      <p class="signup__text">
+        Create your account on FIA'O and start managing your credit sales
+        easily, securely, and in an organized way.
+      </p>
+
+      <ul class="features">
+        <li class="features__item">
+          <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>
+          </svg>
+          <div>
+            <h3>Fast &amp; Easy</h3>
+            <p>Create your account in just a few minutes and start using the platform.</p>
+          </div>
+        </li>
+
+        <li class="features__item">
+          <svg class="features__icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/>
+            <path d="M12 2v20c4.6-1.6 8-6 8-11V5l-8-3Z" fill="#fbefd8" opacity=".55"/>
+          </svg>
+          <div>
+            <h3>Secure</h3>
+            <p>We protect your business and customer information.</p>
+          </div>
+        </li>
+
+        <li class="features__item">
+          <svg class="features__icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.5 19a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 17.7 8.5 4.8 4.8 0 0 1 17.5 19h-11Z"/>
+          </svg>
+          <div>
+            <h3>Cloud-Based</h3>
+            <p>Access your information anytime, anywhere, from any device.</p>
+          </div>
+        </li>
+
+        <li class="features__item">
+          <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M8 17v-5M12 17V8M16 17v-3"/>
+          </svg>
+          <div>
+            <h3>Greater Control</h3>
+            <p>Keep track of your debits and business growth seamlessly.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Formulario -->
+    <section class="signup__card">
+      <h2 class="card__title">Create your account</h2>
+      <p class="card__subtitle">Complete the form to get started</p>
+
+      <form class="form" id="signupForm" action="#" method="post" novalidate>
+
+        <div class="form__group">
+          <label for="fullname">Full name *</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Add your name" autocomplete="name">
+          <small class="form__error"></small>
+        </div>
+
+        <div class="form__group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="Add your email" autocomplete="email">
+          <small class="form__error"></small>
+        </div>
+
+        <div class="form__group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="Add your number" autocomplete="tel">
+          <small class="form__error"></small>
+        </div>
+
+        <div class="form__group">
+          <label for="business">Business Name *</label>
+          <input type="text" id="business" name="business" placeholder="Ejem: Tienda Doña Carmen">
+          <small class="form__error"></small>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" placeholder="Add your password" autocomplete="new-password">
+            <small class="form__error"></small>
+          </div>
+          <div class="form__group">
+            <label for="confirm">Confirm Password *</label>
+            <input type="password" id="confirm" name="confirm" placeholder="Confirm" autocomplete="new-password">
+            <small class="form__error"></small>
+          </div>
+        </div>
+
+        <button type="submit" class="form__button">Create My Account</button>
+
+        <p class="form__message" id="formMessage"></p>
+
+        <p class="form__footer">
+          Already have an account?
+          <a href="index.html">Sign In</a>
+        </p>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="signup.js"></script>
+</body>
+</html>
