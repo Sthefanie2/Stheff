@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b91c1c">
+  <title>FIA'O | Deudas y Pagos</title>
+  <link rel="stylesheet" href="credit.css">
+</head>
+<body>
+
+  <header class="top-header">
+    <a class="logo" href="#" aria-label="FIA'O inicio">
+      FIA<span>´O</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Home</a>
+      <a href="credit.html">Credit</a>
+      <a href="products.html">Products</a>
+      <a href="clientes.html">Clients</a>
+      <a href="reports.html">Reports</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="toolbar">
+    <div class="toolbar-actions">
+      <button class="tool-btn notification-btn" id="notificationBtn"
+        aria-label="Notificaciones" title="Ver notificaciones">
+        ♟ <span class="notification-count" id="notificationCount">0</span>
+      </button>
+
+      <button class="tool-btn" id="languageBtn" title="Cambiar idioma">
+        ◎ <span id="languageLabel">ES</span>
+      </button>
+
+      <button class="tool-btn theme-btn" id="themeBtn"
+        aria-label="Cambiar tema" title="Cambiar tema">☾</button>
+    </div>
+  </div>
+
+  <main class="dashboard" id="inicio">
+    <div class="page-heading">
+      <h1>Debts <span>&amp;</span> Payments</h1>
+      <p>Manage customer debts, register payments, and track balances easily.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <aside class="left-column">
+
+        <section class="card customer-selector" id="clientes">
+          <label for="customerSelect" class="section-label">
+            <span>♟</span> Select a Customer
+          </label>
+
+          <select id="customerSelect">
+            <option value="1">Ramón Batista</option>
+            <option value="2">Carlos Gómez</option>
+            <option value="3">Ana Martínez</option>
+          </select>
+
+          <button class="text-button add-customer-btn"
+            id="addCustomerBtn">+ Add Customer</button>
+        </section>
+
+        <section class="card customer-card" id="credito">
+          <h2 class="customer-name">
+            <span class="customer-avatar">●</span>
+            <span id="customerName">Ramón Batista</span>
+          </h2>
+
+          <div class="balance-grid">
+            <div class="balance-box">
+              <span>Current Debt</span>
+              <strong id="currentDebt">B/. 35.00</strong>
+            </div>
+
+            <div class="balance-box">
+              <span>Credit Limit</span>
+              <strong id="creditLimit">B/. 100.00</strong>
+            </div>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-bar" id="creditProgress"></div>
+          </div>
+
+          <div class="progress-info">
+            <span id="creditUsed">35% used</span>
+            <span>Limit: <b id="limitLabel">B/. 100.00</b></span>
+          </div>
+
+          <p class="limit-warning" id="limitWarning" hidden>
+            Customer has reached the credit limit.
+          </p>
+        </section>
+
+        <section class="card blocking-card">
+          <div class="blocking-content">
+            <h2><span class="shield">⬟</span> Automatic Blocking</h2>
+            <p>If a customer exceeds the debt limit, system prevents new credits.</p>
+          </div>
+
+          <label class="switch" aria-label="Activar bloqueo automático">
+            <input type="checkbox" id="blockingToggle" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </section>
+
+      </aside>
+
+      <!-- COLUMNA CENTRAL -->
+      <section class="center-column">
+
+        <section class="card history-card" id="productos">
+          <div class="card-heading">
+            <h2>Debt History</h2>
+            <p>Track all purchases and payments.</p>
+          </div>
+
+          <div class="history-list" id="historyList">
+            <!-- Las deudas se generan con JavaScript -->
+          </div>
+
+          <button class="text-button history-link" id="showHistoryBtn">
+            View Full History →
+          </button>
+        </section>
+
+        <section class="card payment-card">
+          <div class="card-heading">
+            <h2>Register Payment</h2>
+            <p>Record payments made by the customer.</p>
+          </div>
+
+          <form id="paymentForm">
+            <label for="paymentAmount">Payment Amount</label>
+            <div class="amount-input-wrap">
+              <input
+                type="number"
+                id="paymentAmount"
+                min="0.01"
+                step="0.01"
+                placeholder="B/. 0.00"
+                required
+              >
+            </div>
+
+            <fieldset class="payment-type">
+              <legend>Payment Type</legend>
+
+              <label>
+                <input type="radio" name="paymentType"
+                  value="partial" checked>
+                <span>Partial Payment</span>
+              </label>
+
+              <label>
+                <input type="radio" name="paymentType"
+                  value="full">
+                <span>Full Payment</span>
+              </label>
+            </fieldset>
+
+            <p class="form-message" id="paymentMessage" role="status"></p>
+
+            <div class="payment-actions">
+              <button type="submit" class="btn btn-primary">
+                Register Payment
+              </button>
+
+              <button type="button" class="btn btn-secondary"
+                id="markPaidBtn">Mark as Paid</button>
+            </div>
+          </form>
+        </section>
+
+      </section>
+
+      <!-- COLUMNA DERECHA -->
+      <aside class="right-column">
+
+        <section class="card activity-card">
+          <h2>Recent Activity</h2>
+
+          <div class="activity-list" id="activityList">
+            <!-- La actividad se genera con JavaScript -->
+          </div>
+
+          <button class="text-button" id="viewActivityBtn">
+            View all activity →
+          </button>
+        </section>
+
+        <section class="card overview-card" id="reportes">
+          <h2>Debt Overview</h2>
+
+          <div class="overview-grid">
+            <div class="stat-box">
+              <span>Outstanding Debt</span>
+              <strong id="outstandingDebt">B/. 480.00</strong>
+            </div>
+
+            <div class="stat-box">
+              <span>Payments Today</span>
+              <strong id="paymentsToday">B/. 150.00</strong>
+            </div>
+
+            <div class="stat-box">
+              <span>Customers with Debt</span>
+              <strong id="customersWithDebt">3</strong>
+            </div>
+
+            <div class="stat-box">
+              <span>Overdue</span>
+              <strong id="overdueCount">0</strong>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+    </div>
+  </main>
+
+  <!-- MODAL: AGREGAR CLIENTE -->
+  <dialog id="customerDialog" class="modal">
+    <form id="customerForm">
+      <div class="modal-heading">
+        <h2>Add Customer</h2>
+        <button type="button" class="close-btn"
+          data-close="customerDialog" aria-label="Cerrar">×</button>
+      </div>
+
+      <label for="newCustomerName">Full name</label>
+      <input id="newCustomerName" type="text"
+        placeholder="Customer name" required maxlength="80">
+
+      <label for="newCustomerLimit">Credit limit (B/.)</label>
+      <input id="newCustomerLimit" type="number"
+        min="0" step="0.01" value="100" required>
+
+      <button class="btn btn-primary modal-submit" type="submit">
+        Save Customer
+      </button>
+    </form>
+  </dialog>
+
+  <!-- MODAL: HISTORIAL COMPLETO -->
+  <dialog id="historyDialog" class="modal modal-wide">
+    <div class="modal-heading">
+      <h2>Full Debt History</h2>
+      <button class="close-btn" data-close="historyDialog"
+        aria-label="Cerrar">×</button>
+    </div>
+    <div id="fullHistoryList"></div>
+  </dialog>
+
+  <!-- MODAL: ACTIVIDAD COMPLETA -->
+  <dialog id="activityDialog" class="modal modal-wide">
+    <div class="modal-heading">
+      <h2>All Activity</h2>
+      <button class="close-btn" data-close="activityDialog"
+        aria-label="Cerrar">×</button>
+    </div>
+    <div id="fullActivityList"></div>
+  </dialog>
+
+  <!-- MODAL: NOTIFICACIONES -->
+  <dialog id="notificationDialog" class="modal">
+    <div class="modal-heading">
+      <h2>Notifications</h2>
+      <button class="close-btn" data-close="notificationDialog"
+        aria-label="Cerrar">×</button>
+    </div>
+    <div id="notificationList"></div>
+  </dialog>
+
+  <footer class="page-footer" id="contacto">
+    <span>FIA'O · Debt Management System</span>
+    <span>Customer credit and payments</span>
+  </footer>
+
+  <script src="credit.js"></script>
+</body>
+</html>

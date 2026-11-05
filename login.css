@@ -1,0 +1,730 @@
+/* ============ VARIABLES (colores de las imágenes) ============ */
+
+:root {
+
+  --red: #b52222;          /* rojo principal: logo, botón, navbar */
+
+  --red-dark: #a51d1d;
+
+  --yellow: #ffc81e;       /* botones del menú y la "O" del logo */
+
+  --cream: #fcefd7;        /* fondo principal */
+
+  --cream-shape: #f9db93;  /* figura amarilla de la esquina */
+
+  --white: #ffffff;
+
+  --text: #272b2b;         /* títulos */
+
+  --text-soft: #4a4a4a;    /* textos pequeños */
+
+  --border: #cfd3d8;
+
+  --placeholder: #7d8085;
+
+}
+ 
+/* ============ RESET ============ */
+
+* {
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+}
+ 
+html { scroll-behavior: smooth; }
+ 
+body {
+
+  font-family: "Poppins", sans-serif;
+
+  background: var(--white);
+
+  color: var(--text);
+
+  min-height: 100vh;
+
+}
+ 
+a { text-decoration: none; }
+
+ul { list-style: none; }
+ 
+/* ============ NAVBAR ============ */
+
+.navbar {
+
+  position: relative;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  height: 50px;
+
+  margin: 21px 37px 0 28px;
+
+  padding: 0 27px;
+
+  background: var(--red);
+
+  border-radius: 8px;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+
+}
+ 
+.navbar__logo {
+
+  color: var(--white);
+
+  font-size: 28px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  line-height: 1;
+
+}
+ 
+.navbar__logo span { color: var(--yellow); }
+ 
+.navbar__menu {
+
+  position: absolute;
+
+  left: 436px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 38px;
+
+}
+ 
+.nav-link {
+
+  display: inline-block;
+
+  padding: 3px 13px;
+
+  background: var(--yellow);
+
+  color: #1c1c1c;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  border-radius: 20px;
+
+  transition: transform 0.2s, background 0.2s;
+
+}
+ 
+.nav-link:hover,
+
+.nav-link.active {
+
+  background: #ffd84d;
+
+  transform: translateY(-1px);
+
+}
+ 
+/* ============ HERO ============ */
+
+.hero {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  min-height: calc(100vh - 92px);
+
+  margin: 22px 0 0 51px;
+
+  padding: 60px 126px 60px 155px;
+
+  background: var(--cream);
+
+  overflow: hidden;
+
+}
+ 
+/* Figuras decorativas */
+
+.shape { position: absolute; z-index: 0; }
+ 
+.shape--yellow {
+
+  top: 0;
+
+  right: 0;
+
+  width: 195px;
+
+  height: 345px;
+
+  background: var(--cream-shape);
+
+  border-bottom-left-radius: 195px 200px;
+
+}
+ 
+.shape--red {
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 105px;
+
+  height: 215px;
+
+  background: var(--red);
+
+  border-top-right-radius: 105px 130px;
+
+}
+ 
+/* ============ LADO IZQUIERDO ============ */
+
+.hero__info {
+
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 430px;
+
+}
+ 
+.brand {
+
+  color: var(--red);
+
+  font-size: 40px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  line-height: 1;
+
+  margin-bottom: 36px;
+
+}
+ 
+.brand span {
+
+  font-size: 12px;
+
+  vertical-align: top;
+
+  position: relative;
+
+  top: 6px;
+
+  margin: 0 1px;
+
+}
+ 
+.hero__title {
+
+  font-size: 35px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  color: var(--text);
+
+}
+ 
+.hero__title span { color: var(--red); }
+ 
+.hero__subtitle {
+
+  margin: 16px 0 38px;
+
+  font-size: 14px;
+
+  color: var(--text-soft);
+
+}
+ 
+.features {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+
+}
+ 
+.feature {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+}
+ 
+.feature__icon {
+
+  flex-shrink: 0;
+
+  width: 26px;
+
+  height: 26px;
+
+  color: var(--red);
+
+}
+ 
+.feature h3 {
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #1c1c1c;
+
+}
+ 
+.feature p {
+
+  margin-top: 2px;
+
+  font-size: 11.5px;
+
+  color: var(--text-soft);
+
+}
+ 
+/* ============ LADO DERECHO: LOGIN ============ */
+
+.login {
+
+  position: relative;
+
+  z-index: 1;
+
+  width: 344px;
+
+  flex-shrink: 0;
+
+}
+ 
+.login__card {
+
+  position: relative;
+
+  padding: 34px 34px 26px;
+
+  background: var(--white);
+
+  border-radius: 22px;
+
+  text-align: center;
+
+}
+ 
+/* Marco crema que sobresale detrás de la tarjeta */
+
+.login__card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: -24px;
+
+  right: -24px;
+
+  bottom: 40px;
+
+  left: 0;
+
+  background: var(--cream);
+
+  border-top-right-radius: 28px;
+
+  z-index: -1;
+
+}
+ 
+.login__title {
+
+  font-size: 22px;
+
+  font-weight: 600;
+
+  color: #0e0e0e;
+
+}
+ 
+.login__subtitle {
+
+  margin: 4px 0 26px;
+
+  font-size: 11px;
+
+  color: var(--text-soft);
+
+}
+ 
+/* Campos */
+
+.field {
+
+  position: relative;
+
+  margin-bottom: 20px;
+
+  text-align: left;
+
+}
+ 
+.field label {
+
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10.5px;
+
+  font-weight: 500;
+
+  color: #111;
+
+}
+ 
+.input-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  height: 36px;
+
+  padding: 0 12px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 7px;
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+}
+ 
+.input-box:focus-within {
+
+  border-color: var(--red);
+
+  box-shadow: 0 0 0 3px rgba(181, 34, 34, 0.12);
+
+}
+ 
+.input-box.invalid { border-color: #d62828; }
+ 
+.input-box__icon {
+
+  flex-shrink: 0;
+
+  width: 14px;
+
+  height: 14px;
+
+  color: var(--red);
+
+}
+ 
+.input-box input {
+
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  color: #222;
+
+}
+ 
+.input-box input::placeholder { color: var(--placeholder); }
+ 
+.forgot {
+
+  display: block;
+
+  margin-top: 1px;
+
+  text-align: right;
+
+  font-size: 9.5px;
+
+  color: var(--red);
+
+}
+ 
+.forgot:hover { text-decoration: underline; }
+ 
+.error {
+
+  display: block;
+
+  min-height: 0;
+
+  margin-top: 3px;
+
+  font-size: 9.5px;
+
+  color: #d62828;
+
+  text-align: left;
+
+}
+ 
+/* Botón */
+
+.btn-login {
+
+  width: 100%;
+
+  height: 35px;
+
+  margin-top: 8px;
+
+  background: var(--red);
+
+  color: var(--white);
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  border: none;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: background 0.2s, transform 0.1s;
+
+}
+ 
+.btn-login:hover { background: var(--red-dark); }
+
+.btn-login:active { transform: scale(0.99); }
+
+.btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
+ 
+/* reCAPTCHA (visual) */
+
+.captcha {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  height: 55px;
+
+  margin-top: 20px;
+
+  padding: 0 12px;
+
+  background: #f9f9f9;
+
+  border: 1px solid #d3d3d3;
+
+  border-radius: 3px;
+
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
+
+}
+ 
+.captcha__check {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+}
+ 
+.captcha__check input { display: none; }
+ 
+.captcha__box {
+
+  position: relative;
+
+  width: 22px;
+
+  height: 22px;
+
+  background: var(--white);
+
+  border: 2px solid #c1c1c1;
+
+  border-radius: 2px;
+
+}
+ 
+.captcha__check input:checked + .captcha__box::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 5px;
+
+  top: 0;
+
+  width: 6px;
+
+  height: 12px;
+
+  border: solid #1fa463;
+
+  border-width: 0 3px 3px 0;
+
+  transform: rotate(45deg);
+
+}
+ 
+.captcha__text {
+
+  font-size: 11px;
+
+  color: #222;
+
+}
+ 
+.captcha__logo {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  font-size: 7px;
+
+  color: #555;
+
+}
+ 
+/* Pie de la tarjeta */
+
+.login__footer {
+
+  margin-top: 18px;
+
+  font-size: 10.5px;
+
+  color: var(--text-soft);
+
+}
+ 
+.login__signup {
+
+  display: inline-block;
+
+  margin-top: 12px;
+
+  font-size: 10.5px;
+
+  color: var(--red);
+
+  text-decoration: underline;
+
+}
+ 
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1100px) {
+
+  .hero { padding: 60px 60px 60px 100px; }
+
+  .navbar__menu { left: 260px; gap: 20px; }
+
+}
+ 
+@media (max-width: 860px) {
+
+  .hero {
+
+    flex-direction: column;
+
+    gap: 50px;
+
+    margin-left: 0;
+
+    padding: 50px 24px 60px 24px;
+
+  }
+
+  .shape--red { display: none; }
+
+  .navbar { margin: 14px; }
+
+  .navbar__menu {
+
+    position: static;
+
+    margin-left: auto;
+
+    gap: 8px;
+
+  }
+
+  .nav-link { padding: 3px 8px; }
+
+  .login { width: 100%; max-width: 344px; }
+
+}
+ 
+@media (max-width: 560px) {
+
+  .navbar { height: auto; flex-wrap: wrap; padding: 12px; gap: 10px; }
+
+  .navbar__menu { flex-wrap: wrap; margin-left: 0; }
+
+  .hero__title { font-size: 28px; }
+
+}
+ 
