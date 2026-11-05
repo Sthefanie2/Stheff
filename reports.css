@@ -1,0 +1,722 @@
+
+/* =================================
+   COLORES PRINCIPALES FIA'O
+================================= */
+
+:root {
+    --red: #bd2529;
+    --yellow: #ffca28;
+    --gold: #e0b52e;
+    --brown: #604335;
+    --cream: #fff8df;
+    --white: #ffffff;
+    --text: #282323;
+    --border: #f0ce54;
+    --green: #12bd83;
+    --danger: #fa4848;
+    --muted: #777;
+}
+
+/* =================================
+   CONFIGURACIÓN GENERAL
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+/* =================================
+   MODO OSCURO
+================================= */
+
+body.dark {
+    background: #191919;
+    color: white;
+
+    --white: #262626;
+    --cream: #383126;
+    --text: #ffffff;
+    --border: #766127;
+    --muted: #cccccc;
+}
+
+body.dark .card,
+body.dark .filter-box,
+body.dark .table-container {
+    background: var(--white);
+    color: white;
+}
+
+body.dark input,
+body.dark select {
+    background: #333;
+    color: white;
+}
+
+body.dark td {
+    color: white;
+}
+
+body.dark .chart-area {
+    background: #383126;
+}
+
+body.dark .table-title,
+body.dark thead {
+    background: #383126;
+}
+
+body.dark .table-title,
+body.dark th,
+body.dark .header-title h1,
+body.dark .card h3 {
+    color: var(--yellow);
+}
+
+/* =================================
+   BARRA DE NAVEGACIÓN
+================================= */
+
+.navbar {
+    width: 92%;
+    margin: 28px auto 35px;
+    min-height: 53px;
+    padding: 10px 26px;
+
+    background: var(--red);
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 3px 8px #0002;
+
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--yellow);
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    background: var(--yellow);
+    color: #49321b;
+
+    padding: 8px 17px;
+    border-radius: 25px;
+
+    text-decoration: none;
+    font-size: 12px;
+
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+/* =================================
+   CONTENEDOR PRINCIPAL
+================================= */
+
+.container {
+    width: 86%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =================================
+   ENCABEZADO
+================================= */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-title h1 {
+    font-size: 25px;
+    color: var(--brown);
+}
+
+.chart-icon {
+    color: var(--gold);
+    font-size: 30px;
+}
+
+.header p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--white);
+    color: var(--text);
+
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: var(--yellow);
+    color: #49321b;
+}
+
+.theme-btn {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 17px;
+}
+
+/* =================================
+   FILTROS
+================================= */
+
+.filter-box {
+    background: #fffbed;
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+    padding: 17px;
+
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    margin-bottom: 14px;
+}
+
+.filter-group label {
+    display: block;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    margin-bottom: 7px;
+    color: var(--brown);
+}
+
+.filter-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+input,
+select {
+    width: 100%;
+    height: 34px;
+
+    padding: 7px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: white;
+    font-size: 12px;
+
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--red);
+}
+
+.filter-btn {
+    width: 100%;
+    height: 35px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: var(--brown);
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: var(--red);
+}
+
+/* =================================
+   TARJETAS DE ESTADÍSTICAS
+================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+    padding: 17px;
+
+    box-shadow: 0 3px 8px #00000008;
+}
+
+.stat-card {
+    min-height: 117px;
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 9px;
+    font-weight: bold;
+    color: #68594f;
+}
+
+.stat-icon {
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #fff5d5;
+}
+
+.stat-number {
+    font-size: 21px;
+    font-weight: bold;
+
+    margin-top: 12px;
+    color: var(--text);
+}
+
+.stat-change {
+    font-size: 10px;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.positive {
+    color: #008c57;
+}
+
+.negative {
+    color: #bc2424;
+}
+
+/* =================================
+   GRÁFICAS
+================================= */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.chart-card {
+    min-height: 260px;
+    padding: 17px;
+}
+
+.card h3 {
+    font-size: 13px;
+    color: var(--brown);
+    margin-bottom: 15px;
+}
+
+.legend {
+    display: flex;
+    gap: 14px;
+
+    margin-bottom: 14px;
+
+    font-size: 10px;
+    color: var(--muted);
+
+    flex-wrap: wrap;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.gold-dot {
+    background: #d8ae30;
+}
+
+.green-dot {
+    background: #12bd83;
+}
+
+.red-dot {
+    background: #fa4848;
+}
+
+.chart-area {
+    background: #fff8df;
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+    padding: 12px;
+
+    height: 176px;
+}
+
+.chart-area canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* =================================
+   ESTADOS DE PAGO
+================================= */
+
+.status-item {
+    margin: 25px 0 12px;
+}
+
+.status-heading {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.progress {
+    height: 8px;
+
+    background: white;
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress div {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.green {
+    background: var(--green);
+}
+
+.yellow {
+    background: var(--gold);
+}
+
+.red {
+    background: var(--danger);
+}
+
+/* =================================
+   TABLA DE TRANSACCIONES
+================================= */
+
+.table-container {
+    background: white;
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    margin-bottom: 30px;
+}
+
+.table-title {
+    padding: 15px;
+
+    background: #fff8df;
+    border-bottom: 1px solid var(--border);
+
+    color: var(--brown);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+thead {
+    background: #fff8df;
+}
+
+th {
+    text-align: left;
+    padding: 12px 15px;
+    color: var(--brown);
+}
+
+td {
+    padding: 14px 15px;
+
+    border-top: 1px solid var(--border);
+    color: var(--text);
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+/* =================================
+   ETIQUETAS DE ESTADOS
+================================= */
+
+.status {
+    padding: 5px 10px;
+
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: bold;
+
+    display: inline-block;
+}
+
+.on-time {
+    background: #d4efdc;
+    color: #006b38;
+}
+
+.pending {
+    background: #fff0c9;
+    color: #9c6b00;
+}
+
+.overdue {
+    background: #fbd6da;
+    color: #9e1821;
+}
+
+/* =================================
+   PAGINACIÓN
+================================= */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    gap: 7px;
+    padding: 12px;
+
+    border-top: 1px solid var(--border);
+}
+
+.pagination button {
+    width: 27px;
+    height: 27px;
+
+    border: 1px solid var(--border);
+    background: white;
+
+    border-radius: 6px;
+    cursor: pointer;
+
+    color: #49321b;
+}
+
+.pagination button.active {
+    background: var(--brown);
+    color: white;
+}
+
+.empty {
+    text-align: center;
+    padding: 25px;
+    color: var(--muted);
+}
+
+/* =================================
+   PIE DE PÁGINA
+================================= */
+
+footer {
+    text-align: center;
+    padding: 15px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* =================================
+   RESPONSIVE - TABLETS
+================================= */
+
+@media(max-width: 900px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+}
+
+/* =================================
+   RESPONSIVE - CELULARES
+================================= */
+
+@media(max-width: 550px) {
+
+    .navbar {
+        width: 95%;
+    }
+
+    .nav-links {
+        justify-content: center;
+    }
+
+    .nav-links a {
+        padding: 7px 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-row {
+        flex-direction: column;
+    }
+
+    .header {
+        align-items: flex-start;
+    }
+
+    .header-buttons {
+        flex-wrap: wrap;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 650px;
+    }
+}
+
+/* =================================
+   EXPORTAR / IMPRIMIR PDF
+================================= */
+
+@media print {
+
+    .navbar,
+    .filter-box,
+    .header-buttons,
+    .theme-btn,
+    .pagination,
+    footer {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .card,
+    .table-container {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+}

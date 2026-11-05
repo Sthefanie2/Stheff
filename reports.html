@@ -1,163 +1,224 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIA´O | Reports</title>
- 
-  <!-- Fuente Poppins -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
- 
-  <!-- Íconos Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
- 
-  <link rel="stylesheet" href="reports.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIA'O Reports</title>
+
+    <!-- Conectar CSS -->
+    <link rel="stylesheet" href="reports.css">
+
+    <!-- Librería de gráficas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
- 
-  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
-<header class="navbar">
-<a href="index.html" class="navbar__logo">FIA<span>´O</span></a>
- 
-    <nav class="navbar__menu">
-<a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
-<a href="debts_payments.html" class="nav-link" data-i18n="nav_credit">Credit</a>
-<a href="products.html" class="nav-link" data-i18n="nav_products">Products</a>
-<a href="clients.html" class="nav-link" data-i18n="nav_clients">Clients</a>
-<a href="reports.html" class="nav-link active" data-i18n="nav_reports">Reports</a>
-<a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
-</nav>
-</header>
- 
-  <main class="container">
- 
-    <!-- ============ ENCABEZADO ============ -->
-<section class="page-header">
-<div>
-<div class="page-header__title">
-<i class="fa-solid fa-chart-pie title-icon"></i>
-<h1>FIA'O Reports</h1>
-<button class="icon-btn" id="langBtn" title="Language / Idioma"><i class="fa-solid fa-language"></i></button>
-<button class="icon-btn" id="themeBtn" title="Dark mode"><i class="fa-solid fa-moon"></i></button>
-</div>
-<p class="page-header__sub" data-i18n="subtitle">Financial tracking, credit summaries, and business analytics overview.</p>
-</div>
- 
-      <div class="export-btns">
-<button class="btn-export" id="exportPdf"><i class="fa-solid fa-file-pdf pdf"></i> <span data-i18n="export_pdf">Export PDF</span></button>
-<button class="btn-export" id="exportExcel"><i class="fa-solid fa-file-excel xls"></i> <span data-i18n="export_excel">Export Excel</span></button>
-</div>
-</section>
- 
-    <!-- ============ FILTROS ============ -->
-<section class="filters">
-<label class="filters__label" data-i18n="date_range">DATE RANGE</label>
-<div class="date-row">
-<div class="input-wrap">
-<i class="fa-solid fa-calendar left"></i>
-<input type="date" id="dateFrom" value="2026-07-01">
-</div>
-<span class="date-row__to" data-i18n="to">to</span>
-<div class="input-wrap">
-<input type="date" id="dateTo" value="2026-07-31">
-</div>
-</div>
- 
-      <label class="filters__label" data-i18n="customer_status">CUSTOMER STATUS / NAME</label>
-<div class="input-wrap select-wrap">
-<i class="fa-solid fa-users left"></i>
-<select id="customerSelect">
-<option value="all" data-i18n="all_customers">All Customers (All Names)</option>
-</select>
-<i class="fa-solid fa-chevron-down right"></i>
-</div>
- 
-      <button class="btn-apply" id="applyFilters"><i class="fa-solid fa-filter"></i> <span data-i18n="apply_filters">Apply Filters</span></button>
-</section>
- 
-    <!-- ============ TARJETAS DE RESUMEN ============ -->
-<section class="cards">
-<article class="card">
-<div class="card__top">
-<span class="card__label" data-i18n="total_active">TOTAL ACTIVE CREDIT</span>
-<span class="card__icon gold"><i class="fa-solid fa-wallet"></i></span>
-</div>
-<h2 class="card__value" id="kpiActive">$1,450.00</h2>
-<p class="card__note up"><i class="fa-solid fa-arrow-up"></i> <span id="kpiActiveNote">+8.4% from last month</span></p>
-</article>
- 
-      <article class="card">
-<div class="card__top">
-<span class="card__label" data-i18n="collected">COLLECTED THIS MONTH</span>
-<span class="card__icon green"><i class="fa-solid fa-circle-check"></i></span>
-</div>
-<h2 class="card__value" id="kpiCollected">$3,120.50</h2>
-<p class="card__note up"><i class="fa-solid fa-arrow-up"></i> <span id="kpiCollectedNote">+12.1% efficiency</span></p>
-</article>
- 
-      <article class="card">
-<div class="card__top">
-<span class="card__label" data-i18n="pending">PENDING BALANCES</span>
-<span class="card__icon red"><i class="fa-solid fa-triangle-exclamation"></i></span>
-</div>
-<h2 class="card__value" id="kpiPending">$340.00</h2>
-<p class="card__note down"><i class="fa-solid fa-arrow-down"></i> <span id="kpiPendingNote">-3 accounts overdue</span></p>
-</article>
- 
-      <article class="card">
-<div class="card__top">
-<span class="card__label" data-i18n="total_customers">TOTAL CUSTOMERS</span>
-<span class="card__icon blue"><i class="fa-solid fa-address-book"></i></span>
-</div>
-<h2 class="card__value" id="kpiCustomers">48</h2>
-<p class="card__note up"><i class="fa-solid fa-user-plus"></i> <span id="kpiCustomersNote">+5 new this month</span></p>
-</article>
-</section>
- 
-    <!-- ============ GRÁFICAS ============ -->
-<section class="charts">
-<article class="panel">
-<h3 class="panel__title" data-i18n="activity_title">Credit Activity &amp; Payments Flow</h3>
-<ul class="legend">
-<li><span class="dot gold-bg"></span> <span data-i18n="credit_issued">Credit Issued</span></li>
-<li><span class="dot green-bg"></span> <span data-i18n="payments_received">Payments Received</span></li>
-<li><span class="dot red-bg"></span> <span data-i18n="overdue">Overdue</span></li>
-</ul>
-<div class="bar-chart" id="barChart"></div>
-</article>
- 
-      <article class="panel">
-<h3 class="panel__title" data-i18n="status_title">Payment Status Breakdown</h3>
-<div class="status-list" id="statusList"></div>
-</article>
-</section>
- 
-    <!-- ============ TABLA DE TRANSACCIONES ============ -->
-<section class="table-box">
-<h3 class="table-box__title" data-i18n="recent_title">Recent Credit Transactions</h3>
- 
-      <div class="table-scroll">
-<table>
-<thead>
-<tr>
-<th data-i18n="th_customer">Customer Name</th>
-<th data-i18n="th_description">Description</th>
-<th data-i18n="th_amount">Amount</th>
-<th data-i18n="th_date">Date</th>
-<th data-i18n="th_status">Status</th>
-</tr>
-</thead>
-<tbody id="tableBody"></tbody>
-</table>
-</div>
- 
-      <div class="pagination" id="pagination"></div>
-</section>
-</main>
- 
-  <script src="reports.js"></script>
+
+    <!-- MENÚ -->
+    <nav class="navbar">
+        <div class="logo">FIA<span>'O</span></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="credit.html">Credit</a>
+            <a href="products.html">Products</a>
+            <a href="clients.html">Clients</a>
+            <a href="reports.html">Reports</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="container" id="home">
+
+        <!-- ENCABEZADO -->
+        <section class="header">
+            <div>
+                <div class="header-title">
+                    <span class="chart-icon">◔</span>
+                    <h1>FIA'O Reports</h1>
+                    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+                </div>
+
+                <p>Financial tracking, credit summaries, and business analytics overview.</p>
+            </div>
+
+            <div class="header-buttons">
+                <button class="btn" onclick="exportPDF()">📕 Export PDF</button>
+                <button class="btn" onclick="exportExcel()">📗 Export Excel</button>
+            </div>
+        </section>
+
+        <!-- FILTROS -->
+        <section class="filter-box">
+
+            <div class="filter-group">
+                <label>DATE RANGE</label>
+
+                <div class="filter-row">
+                    <input type="date" id="startDate" value="2026-07-01">
+                    <span>to</span>
+                    <input type="date" id="endDate" value="2026-07-31">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>CUSTOMER STATUS / NAME</label>
+
+                <select id="customerFilter">
+                    <option value="all">👥 All Customers (All Names)</option>
+                    <option value="Maria Gomez">Maria Gomez</option>
+                    <option value="Carlos Mendoza">Carlos Mendoza</option>
+                    <option value="Ana Ruiz">Ana Ruiz</option>
+                    <option value="Luis Torres">Luis Torres</option>
+                    <option value="Sofia Perez">Sofia Perez</option>
+                </select>
+            </div>
+
+            <button class="filter-btn" onclick="applyFilters()">
+                ⚑ Apply Filters
+            </button>
+
+        </section>
+
+        <!-- TARJETAS ESTADÍSTICAS -->
+        <section class="stats-grid" id="credit">
+
+            <div class="card stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">TOTAL ACTIVE CREDIT</span>
+                    <span class="stat-icon">💳</span>
+                </div>
+                <div class="stat-number">$1,450.00</div>
+                <div class="stat-change positive">↑ +8.4% from last month</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">COLLECTED THIS MONTH</span>
+                    <span class="stat-icon">🟢</span>
+                </div>
+                <div class="stat-number">$3,120.50</div>
+                <div class="stat-change positive">↑ +12.1% efficiency</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">PENDING BALANCES</span>
+                    <span class="stat-icon">🔺</span>
+                </div>
+                <div class="stat-number">$340.00</div>
+                <div class="stat-change negative">↓ 3 accounts overdue</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">TOTAL CUSTOMERS</span>
+                    <span class="stat-icon">👤</span>
+                </div>
+                <div class="stat-number">48</div>
+                <div class="stat-change positive">♟ +5 new this month</div>
+            </div>
+
+        </section>
+
+        <!-- GRÁFICAS -->
+        <section class="charts-grid" id="reports">
+
+            <div class="card chart-card">
+                <h3>Credit Activity & Payments Flow</h3>
+
+                <div class="legend">
+                    <span>
+                        <i class="dot gold-dot"></i>
+                        Credit Issued
+                    </span>
+
+                    <span>
+                        <i class="dot green-dot"></i>
+                        Payments Received
+                    </span>
+
+                    <span>
+                        <i class="dot red-dot"></i>
+                        Overdue
+                    </span>
+                </div>
+
+                <div class="chart-area">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <h3>Payment Status Breakdown</h3>
+
+                <div class="status-item">
+                    <div class="status-heading">
+                        <span>On Time (75%)</span>
+                        <span>$2,340</span>
+                    </div>
+                    <div class="progress">
+                        <div class="green" style="width:75%"></div>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-heading">
+                        <span>Pending (17%)</span>
+                        <span>$540</span>
+                    </div>
+                    <div class="progress">
+                        <div class="yellow" style="width:17%"></div>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-heading">
+                        <span>Overdue (8%)</span>
+                        <span>$240</span>
+                    </div>
+                    <div class="progress">
+                        <div class="red" style="width:8%"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+        <section class="table-container" id="clients">
+
+            <div class="table-title">
+                Recent Credit Transactions
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactionBody"></tbody>
+            </table>
+
+            <div class="pagination" id="pagination"></div>
+
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        FIA'O Reports © 2026 - Financial Management Dashboard
+    </footer>
+
+    <!-- Conectar JavaScript -->
+    <script src="reports.js"></script>
+
 </body>
 </html>
- 
