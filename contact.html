@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIA´O | Contact and Support</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo">FIA<span>´O</span></a>
+
+    <nav class="navbar__menu">
+      <a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
+      <a href="credit.html" class="nav-link" data-i18n="nav_credit">Credit</a>
+      <a href="products.html" class="nav-link" data-i18n="nav_products">Products</a>
+      <a href="clients.html" class="nav-link" data-i18n="nav_clients">Clients</a>
+      <a href="reports.html" class="nav-link" data-i18n="nav_reports">Reports</a>
+      <a href="contact.html" class="nav-link active" data-i18n="nav_contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ============ ENCABEZADO ============ -->
+    <section class="page-header">
+      <div>
+        <div class="page-header__title">
+          <i class="fa-solid fa-envelope title-icon"></i>
+          <h1 data-i18n="title">Contact and support</h1>
+        </div>
+        <p class="page-header__sub">
+          <span data-i18n="sub1">Have questions? We are here to help</span><br>
+          <span data-i18n="sub2">Check out the FAQs below or open the chat anytime for instant support.</span>
+        </p>
+      </div>
+
+      <div class="header-btns">
+        <button class="icon-btn" id="langBtn" title="Language / Idioma"><i class="fa-solid fa-language"></i></button>
+        <button class="icon-btn" id="themeBtn" title="Dark mode"><i class="fa-solid fa-moon"></i></button>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- ============ PREGUNTAS FRECUENTES ============ -->
+      <div class="faq" id="faqList">
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span data-i18n="q1">Does it work without internet?</span><i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="faq__answer"><p data-i18n="a1"></p></div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span data-i18n="q2">How to start using the app?</span><i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="faq__answer"><p data-i18n="a2"></p></div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span data-i18n="q3">Do payment reminders arrive automatically?</span><i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="faq__answer"><p data-i18n="a3"></p></div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span data-i18n="q4">Can I export my reports?</span><i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="faq__answer"><p data-i18n="a4"></p></div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span data-i18n="q5">What if a customer doesn't pay?</span><i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="faq__answer"><p data-i18n="a5"></p></div>
+        </div>
+      </div>
+
+      <!-- ============ FORMULARIO ============ -->
+      <div class="form-card">
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name" data-i18n="f_name">NAME</label>
+            <input type="text" id="name" data-i18n-ph="ph_name" placeholder="Your name">
+            <small class="error" id="nameError"></small>
+          </div>
+
+          <div class="field">
+            <label for="email" data-i18n="f_email">EMAIL</label>
+            <input type="email" id="email" placeholder="yourcorreo@example.com">
+            <small class="error" id="emailError"></small>
+          </div>
+
+          <div class="field">
+            <label for="message" data-i18n="f_message">MESSAGE</label>
+            <textarea id="message" rows="4" data-i18n-ph="ph_message" placeholder="Tell us how we can help you"></textarea>
+            <small class="error" id="messageError"></small>
+          </div>
+
+          <button type="submit" class="btn-send" id="sendBtn" data-i18n="send">Send message</button>
+          <p class="form-success" id="formSuccess"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <h2>FIA<span>'O</span></h2>
+          <p data-i18n="footer_desc">The app for shopkeepers to manage their credit lines without paper notebooks or wall markings.</p>
+        </div>
+
+        <div class="footer__col">
+          <h4 data-i18n="f_nav">NAVIGATION</h4>
+          <a href="index.html">Inicio</a>
+          <a href="clients.html">Clientes</a>
+          <a href="products.html">Productos</a>
+          <a href="credit.html">Fiados</a>
+        </div>
+
+        <div class="footer__col">
+          <h4 data-i18n="f_product">PRODUCT</h4>
+          <a href="reports.html">Reportes</a>
+          <a href="contact.html">Soporte</a>
+          <a href="#faqList">Preguntas frecuentes</a>
+        </div>
+
+        <div class="footer__col footer__contact">
+          <h4 data-i18n="f_contact">CONTACT</h4>
+          <p>hola@fiao.app</p>
+          <p>+507 6000-0000</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span data-i18n="copyright">© 2026 FIA'O. Visual prototypes.</span>
+        <span data-i18n="made_for">Made for local businesses</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ ASISTENTE DE IA (chat flotante) ============ -->
+  <button class="chat-fab" id="chatFab" aria-label="Open chat"><i class="fa-solid fa-comment-dots"></i></button>
+
+  <section class="chat" id="chatBox" aria-hidden="true">
+    <div class="chat__header">
+      <div class="chat__avatar"><i class="fa-solid fa-robot"></i></div>
+      <div>
+        <strong>FIA'O Assistant</strong>
+        <small data-i18n="chat_status">AI assistant · online</small>
+      </div>
+      <button class="chat__close" id="chatClose" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="chat__messages" id="chatMessages"></div>
+
+    <div class="chat__chips" id="chatChips"></div>
+
+    <form class="chat__form" id="chatForm">
+      <input type="text" id="chatInput" data-i18n-ph="chat_ph" placeholder="Type your question..." autocomplete="off">
+      <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <script src="contact.js"></script>
+</body>
+</html>
