@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIA'O | Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="Perfil.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome Professional Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVBAR
+    ====================================== -->
+
+    <header class="navbar">
+
+        <a href="dashboard.html" class="logo">
+            FIA<span>´O</span>
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="index.html" class="active">Home</a>
+
+            <a href="credit.html">Credit</a>
+
+            <a href="products.html">Products</a>
+
+            <a href="clients.css">Clients</a>
+
+            <a href="reports.html">Reports</a>
+
+            <a href="contact.css">Contact</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN DASHBOARD
+    ====================================== -->
+
+    <main class="dashboard">
+
+
+        <!-- =====================================
+             WELCOME SECTION
+        ====================================== -->
+
+        <section class="welcome-section">
+
+            <div class="welcome-text">
+
+                <span class="small-brand">FIA´O</span>
+
+                <h1>
+                    Welcome, <span id="userName">User</span>
+                </h1>
+
+                <p>
+                    Everything you need to manage your business is right here.
+                </p>
+
+            </div>
+
+
+            <!-- PROFILE AREA -->
+
+            <div class="profile-area">
+
+                <button class="profile-button"
+                        id="profileButton"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="Open profile menu">
+
+                    <div class="profile-avatar" id="avatar">
+
+                        <span id="avatarLetter">U</span>
+
+                    </div>
+
+                    <div class="profile-info">
+
+                        <strong id="profileName">User</strong>
+
+                        <small id="businessName">My Business</small>
+
+                    </div>
+
+                    <span class="arrow">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+
+                </button>
+
+
+                <!-- PROFILE DROPDOWN -->
+
+                <div class="profile-dropdown" id="profileDropdown">
+
+                    <div class="dropdown-user">
+
+                        <strong id="dropdownName">User</strong>
+
+                        <small>Account settings</small>
+
+                    </div>
+
+
+                    <button type="button" data-action="profile">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        My Profile
+
+                    </button>
+
+
+                    <button type="button" data-action="edit">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit Profile
+
+                    </button>
+
+
+                    <button type="button" data-action="picture">
+
+                        <i class="fa-regular fa-image"></i>
+
+                        Change Profile Picture
+
+                    </button>
+
+
+                    <hr>
+
+
+                    <button type="button" data-action="theme">
+
+                        <i class="fa-regular fa-moon"></i>
+
+                        Theme
+
+                    </button>
+
+
+                    <button type="button" data-action="language">
+
+                        <i class="fa-solid fa-language"></i>
+
+                        <span id="languageLabel">Language (EN/ES)</span>
+
+                    </button>
+
+
+                    <button type="button" data-action="notifications">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        Notifications
+
+                    </button>
+
+
+                    <button type="button" data-action="settings">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Settings
+
+                    </button>
+
+
+                    <hr>
+
+
+                    <button type="button"
+                            class="logout"
+                            data-action="logout">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Log Out
+
+                    </button>
+
+                </div>
+
+
+                <!-- PROFILE PICTURE INPUT -->
+
+                <input
+                    type="file"
+                    id="pictureInput"
+                    accept="image/*"
+                    hidden
+                >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             MAIN MODULES
+        ====================================== -->
+
+        <section class="modules">
+
+
+            <!-- CUSTOMERS -->
+
+            <a href="client.html" class="module-card">
+
+                <div class="module-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <div>
+
+                    <h3
+                        data-en="Customers"
+                        data-es="Clientes">
+
+                        Customers
+
+                    </h3>
+
+                    <p
+                        data-en="Manage customer information and debts."
+                        data-es="Administra la información y las deudas de tus clientes.">
+
+                        Manage customer information and debts.
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PRODUCTS -->
+
+            <a href="products.html" class="module-card">
+
+                <div class="module-icon">
+
+                    <i class="fa-solid fa-cube"></i>
+
+                </div>
+
+                <div>
+
+                    <h3
+                        data-en="Products"
+                        data-es="Productos">
+
+                        Products
+
+                    </h3>
+
+                    <p
+                        data-en="Manage inventory and product prices."
+                        data-es="Administra el inventario y los precios de productos.">
+
+                        Manage inventory and product prices.
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- CREDITS AND PAYMENTS -->
+
+            <a href="credit.html" class="module-card">
+
+                <div class="module-icon">
+
+                    <i class="fa-regular fa-credit-card"></i>
+
+                </div>
+
+                <div>
+
+                    <h3
+                        data-en="Credits & Payments"
+                        data-es="Créditos y pagos">
+
+                        Credits & Payments
+
+                    </h3>
+
+                    <p
+                        data-en="Register credits, payments and customer balances."
+                        data-es="Registra créditos, pagos y saldos de clientes.">
+
+                        Register credits, payments and customer balances.
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- REPORTS -->
+
+            <a href="reports.html" class="module-card">
+
+                <div class="module-icon">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+                <div>
+
+                    <h3
+                        data-en="Reports"
+                        data-es="Reportes">
+
+                        Reports
+
+                    </h3>
+
+                    <p
+                        data-en="View statistics and financial reports."
+                        data-es="Consulta estadísticas e informes financieros.">
+
+                        View statistics and financial reports.
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             QUICK STATISTICS
+        ====================================== -->
+
+        <section class="statistics-section">
+
+            <h2
+                data-en="Quick Statistics"
+                data-es="Estadísticas rápidas">
+
+                Quick Statistics
+
+            </h2>
+
+
+            <div class="statistics-grid">
+
+
+                <!-- CUSTOMERS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                    <h3 id="customersCount">128</h3>
+
+                    <span
+                        data-en="CUSTOMERS"
+                        data-es="CLIENTES">
+
+                        CUSTOMERS
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- PRODUCTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+                    <h3 id="productsCount">254</h3>
+
+                    <span
+                        data-en="PRODUCTS"
+                        data-es="PRODUCTOS">
+
+                        PRODUCTS
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- CREDITS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-wallet"></i>
+
+                    </div>
+
+                    <h3 id="creditsAmount">B/. 1,250</h3>
+
+                    <span
+                        data-en="CREDITS"
+                        data-es="CRÉDITOS">
+
+                        CREDITS
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- PAYMENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                    </div>
+
+                    <h3 id="paymentsAmount">B/. 320</h3>
+
+                    <span
+                        data-en="PAYMENTS TODAY"
+                        data-es="PAGOS DE HOY">
+
+                        PAYMENTS TODAY
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             RECENT ACTIVITY
+        ====================================== -->
+
+        <section class="activity-section">
+
+            <h2
+                data-en="Recent Activity"
+                data-es="Actividad reciente">
+
+                Recent Activity
+
+            </h2>
+
+
+
+            <!-- PAYMENT RECEIVED -->
+
+            <div class="activity-item">
+
+                <div class="activity-icon green">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <div class="activity-description">
+
+                    <strong>John Smith</strong>
+
+                    <p
+                        data-en="Payment received"
+                        data-es="Pago recibido">
+
+                        Payment received
+
+                    </p>
+
+                </div>
+
+                <span class="activity-date">
+                    Today · B/.25
+                </span>
+
+            </div>
+
+
+
+            <!-- NEW CREDIT -->
+
+            <div class="activity-item">
+
+                <div class="activity-icon red">
+
+                    <i class="fa-solid fa-file-circle-plus"></i>
+
+                </div>
+
+                <div class="activity-description">
+
+                    <strong>Maria Lopez</strong>
+
+                    <p
+                        data-en="New credit registered"
+                        data-es="Nuevo crédito registrado">
+
+                        New credit registered
+
+                    </p>
+
+                </div>
+
+                <span class="activity-date">
+                    Today · B/.18
+                </span>
+
+            </div>
+
+
+
+            <!-- DEBT REMINDER -->
+
+            <div class="activity-item">
+
+                <div class="activity-icon yellow">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                </div>
+
+                <div class="activity-description">
+
+                    <strong>Carlos Perez</strong>
+
+                    <p
+                        data-en="Debt reminder sent"
+                        data-es="Recordatorio de deuda enviado">
+
+                        Debt reminder sent
+
+                    </p>
+
+                </div>
+
+                <span class="activity-date">
+                    Yesterday
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         PROFESSIONAL CHAT
+    ====================================== -->
+
+    <div class="chat-container">
+
+
+        <!-- CHAT WINDOW -->
+
+        <div class="chat-window" id="chatWindow">
+
+
+            <!-- CHAT HEADER -->
+
+            <h3>FIA'O Support</h3>
+
+
+            <!-- INITIAL MESSAGE -->
+
+            <p
+                data-en="Welcome! How can we help you?"
+                data-es="¡Bienvenido! ¿Cómo podemos ayudarte?">
+
+                Welcome! How can we help you?
+
+            </p>
+
+
+            <!-- CHAT MESSAGES -->
+
+            <div id="chatMessages"></div>
+
+
+            <!-- CHAT INPUT -->
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Write a message..."
+                autocomplete="off"
+                aria-label="Write a message"
+            >
+
+
+            <!-- SEND BUTTON -->
+
+            <button
+                type="button"
+                id="sendMessage"
+                aria-label="Send message">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- FLOATING CHAT BUTTON -->
+
+        <button
+            class="chat-button"
+            id="chatButton"
+            type="button"
+            aria-label="Open support chat">
+
+            <i class="fa-solid fa-comments"></i>
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="Perfil.js"></script>
+
+</body>
+
+</html>
