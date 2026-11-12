@@ -1,224 +1,222 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIA'O Reports</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIA´O | Reports</title>
 
-    <!-- Conectar CSS -->
-    <link rel="stylesheet" href="reports.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Librería de gráficas -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Aplica el tema guardado antes de pintar la página (evita el parpadeo) -->
+  <script>
+    try {
+      var saved = localStorage.getItem("fiao-theme");
+      if (!saved) saved = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {}
+  </script>
+
+  <link rel="stylesheet" href="reports.css">
 </head>
-
 <body>
 
-    <!-- MENÚ -->
-    <nav class="navbar">
-        <div class="logo">FIA<span>'O</span></div>
+  <!-- ============ ÍCONOS (SVG profesionales, estilo línea) ============ -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+    <symbol id="i-pie" viewBox="0 0 24 24"><path d="M11 2.05A10 10 0 1 0 21.95 13H11V2.05Z" fill="currentColor" stroke="none"/><path d="M13 2.05V11h8.95A10 10 0 0 0 13 2.05Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-file-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+    <symbol id="i-file-sheet" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 12h8M8 16h8M12 12v8"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" fill="currentColor"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-id-card" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M7.5 17a4.5 4 0 0 1 9 0"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+    <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol>
+  </svg>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="credit.html">Credit</a>
-            <a href="products.html">Products</a>
-            <a href="clients.html">Clients</a>
-            <a href="reports.html">Reports</a>
-            <a href="contact.html">Contact</a>
-        </div>
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo">FIA<span>´O</span></a>
+    <nav class="navbar__menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="credit.html" class="nav-link">Credit</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="clients.html" class="nav-link">Clients</a>
+      <a href="reports.html" class="nav-link active" aria-current="page">Reports</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </nav>
+  </header>
 
-    <main class="container" id="home">
+  <main class="container">
 
-        <!-- ENCABEZADO -->
-        <section class="header">
-            <div>
-                <div class="header-title">
-                    <span class="chart-icon">◔</span>
-                    <h1>FIA'O Reports</h1>
-                    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-                </div>
+    <!-- ============ ENCABEZADO ============ -->
+    <div class="page-head">
+      <div class="title-row">
+        <h1>
+          <svg class="icon icon--pie" aria-hidden="true"><use href="#i-pie"/></svg>
+          FIA'O Reports
+        </h1>
+        <button type="button" class="icon-btn" id="langBtn" data-i18n-title="langBtn" aria-label="Change language">
+          <svg class="icon"><use href="#i-languages"/></svg>
+        </button>
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg class="icon"><use href="#i-moon" id="themeUse"/></svg>
+        </button>
+      </div>
 
-                <p>Financial tracking, credit summaries, and business analytics overview.</p>
-            </div>
+      <div class="export-btns">
+        <button type="button" class="btn-export" id="exportPdf">
+          <svg class="icon icon--pdf" aria-hidden="true"><use href="#i-file-pdf"/></svg>
+          <span data-i18n="exportPdf">Export PDF</span>
+        </button>
+        <button type="button" class="btn-export" id="exportExcel">
+          <svg class="icon icon--xls" aria-hidden="true"><use href="#i-file-sheet"/></svg>
+          <span data-i18n="exportExcel">Export Excel</span>
+        </button>
+      </div>
+    </div>
+    <p class="subtitle" data-i18n="subtitle">Financial tracking, credit summaries, and business analytics overview.</p>
 
-            <div class="header-buttons">
-                <button class="btn" onclick="exportPDF()">📕 Export PDF</button>
-                <button class="btn" onclick="exportExcel()">📗 Export Excel</button>
-            </div>
-        </section>
+    <!-- ============ FILTROS ============ -->
+    <section class="filters" id="filtersPanel">
+      <form id="filterForm" novalidate>
+        <label class="field-label" for="dateFrom" data-i18n="dateRange">Date Range</label>
+        <div class="date-range">
+          <div class="date-field">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            <input type="date" id="dateFrom" value="2026-07-01" aria-label="Start date">
+          </div>
+          <span class="date-range__to" data-i18n="to">to</span>
+          <div class="date-field">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            <input type="date" id="dateTo" value="2026-07-31" aria-label="End date">
+          </div>
+        </div>
 
-        <!-- FILTROS -->
-        <section class="filter-box">
+        <label class="field-label" for="customerSelect" data-i18n="customerLabel">Customer Status / Name</label>
+        <div class="select-box">
+          <svg class="icon select-box__icon" aria-hidden="true"><use href="#i-users"/></svg>
+          <select id="customerSelect"></select>
+          <svg class="icon select-box__chevron" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+        </div>
 
-            <div class="filter-group">
-                <label>DATE RANGE</label>
+        <button type="submit" class="apply" id="applyBtn">
+          <svg class="icon" aria-hidden="true"><use href="#i-filter"/></svg>
+          <span data-i18n="applyFilters">Apply Filters</span>
+        </button>
+        <p class="filter-msg" id="filterMsg" role="alert"></p>
+      </form>
+    </section>
 
-                <div class="filter-row">
-                    <input type="date" id="startDate" value="2026-07-01">
-                    <span>to</span>
-                    <input type="date" id="endDate" value="2026-07-31">
-                </div>
-            </div>
+    <!-- Filtros aplicados -->
+    <div class="chips" id="chips" aria-live="polite"></div>
 
-            <div class="filter-group">
-                <label>CUSTOMER STATUS / NAME</label>
+    <!-- Resumen del cliente (aparece cuando se filtra un cliente) -->
+    <section class="client-card" id="clientCard" hidden>
+      <div class="client-head">
+        <div class="avatar" id="clientAvatar"></div>
+        <div>
+          <h3 id="clientName"></h3>
+          <p id="clientMeta"></p>
+        </div>
+      </div>
+      <div class="client-stats" id="clientStats"></div>
+    </section>
 
-                <select id="customerFilter">
-                    <option value="all">👥 All Customers (All Names)</option>
-                    <option value="Maria Gomez">Maria Gomez</option>
-                    <option value="Carlos Mendoza">Carlos Mendoza</option>
-                    <option value="Ana Ruiz">Ana Ruiz</option>
-                    <option value="Luis Torres">Luis Torres</option>
-                    <option value="Sofia Perez">Sofia Perez</option>
-                </select>
-            </div>
+    <!-- ============ TARJETAS DE RESUMEN ============ -->
+    <section class="kpis">
+      <article class="kpi">
+        <div class="kpi__top">
+          <span class="kpi__label" data-i18n="kpiActive">Total Active Credit</span>
+          <span class="kpi__icon kpi__icon--gold"><svg class="icon"><use href="#i-wallet"/></svg></span>
+        </div>
+        <strong class="kpi__value" id="kpiActive">$0.00</strong>
+        <p class="kpi__delta" id="kpiActiveDelta"></p>
+      </article>
 
-            <button class="filter-btn" onclick="applyFilters()">
-                ⚑ Apply Filters
-            </button>
+      <article class="kpi">
+        <div class="kpi__top">
+          <span class="kpi__label" data-i18n="kpiCollected">Collected This Month</span>
+          <span class="kpi__icon kpi__icon--green"><svg class="icon"><use href="#i-check-circle"/></svg></span>
+        </div>
+        <strong class="kpi__value" id="kpiCollected">$0.00</strong>
+        <p class="kpi__delta" id="kpiCollectedDelta"></p>
+      </article>
 
-        </section>
+      <article class="kpi">
+        <div class="kpi__top">
+          <span class="kpi__label" data-i18n="kpiPending">Pending Balances</span>
+          <span class="kpi__icon kpi__icon--red"><svg class="icon"><use href="#i-alert"/></svg></span>
+        </div>
+        <strong class="kpi__value" id="kpiPending">$0.00</strong>
+        <p class="kpi__delta" id="kpiPendingDelta"></p>
+      </article>
 
-        <!-- TARJETAS ESTADÍSTICAS -->
-        <section class="stats-grid" id="credit">
+      <article class="kpi">
+        <div class="kpi__top">
+          <span class="kpi__label" data-i18n="kpiCustomers">Total Customers</span>
+          <span class="kpi__icon kpi__icon--blue"><svg class="icon"><use href="#i-id-card"/></svg></span>
+        </div>
+        <strong class="kpi__value" id="kpiCustomers">0</strong>
+        <p class="kpi__delta" id="kpiCustomersDelta"></p>
+      </article>
+    </section>
 
-            <div class="card stat-card">
-                <div class="stat-top">
-                    <span class="stat-label">TOTAL ACTIVE CREDIT</span>
-                    <span class="stat-icon">💳</span>
-                </div>
-                <div class="stat-number">$1,450.00</div>
-                <div class="stat-change positive">↑ +8.4% from last month</div>
-            </div>
+    <!-- ============ GRÁFICAS ============ -->
+    <section class="charts">
+      <article class="panel">
+        <h2 data-i18n="chartTitle">Credit Activity & Payments Flow</h2>
+        <ul class="legend">
+          <li><i class="dot dot--gold"></i><span data-i18n="legIssued">Credit Issued</span></li>
+          <li><i class="dot dot--green"></i><span data-i18n="legPaid">Payments Received</span></li>
+          <li><i class="dot dot--red"></i><span data-i18n="legOverdue">Overdue</span></li>
+        </ul>
+        <div class="chart" id="chart"></div>
+      </article>
 
-            <div class="card stat-card">
-                <div class="stat-top">
-                    <span class="stat-label">COLLECTED THIS MONTH</span>
-                    <span class="stat-icon">🟢</span>
-                </div>
-                <div class="stat-number">$3,120.50</div>
-                <div class="stat-change positive">↑ +12.1% efficiency</div>
-            </div>
+      <article class="panel">
+        <h2 data-i18n="breakdownTitle">Payment Status Breakdown</h2>
+        <div class="breakdown" id="breakdown"></div>
+      </article>
+    </section>
 
-            <div class="card stat-card">
-                <div class="stat-top">
-                    <span class="stat-label">PENDING BALANCES</span>
-                    <span class="stat-icon">🔺</span>
-                </div>
-                <div class="stat-number">$340.00</div>
-                <div class="stat-change negative">↓ 3 accounts overdue</div>
-            </div>
+    <!-- ============ TRANSACCIONES ============ -->
+    <section class="table-card">
+      <div class="table-card__head">
+        <h2 data-i18n="tableTitle">Recent Credit Transactions</h2>
+        <span class="table-card__count" id="tableCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="colCustomer">Customer Name</th>
+              <th data-i18n="colDesc">Description</th>
+              <th data-i18n="colAmount">Amount</th>
+              <th data-i18n="colDate">Date</th>
+              <th data-i18n="colStatus">Status</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
+    </section>
+  </main>
 
-            <div class="card stat-card">
-                <div class="stat-top">
-                    <span class="stat-label">TOTAL CUSTOMERS</span>
-                    <span class="stat-icon">👤</span>
-                </div>
-                <div class="stat-number">48</div>
-                <div class="stat-change positive">♟ +5 new this month</div>
-            </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        </section>
-
-        <!-- GRÁFICAS -->
-        <section class="charts-grid" id="reports">
-
-            <div class="card chart-card">
-                <h3>Credit Activity & Payments Flow</h3>
-
-                <div class="legend">
-                    <span>
-                        <i class="dot gold-dot"></i>
-                        Credit Issued
-                    </span>
-
-                    <span>
-                        <i class="dot green-dot"></i>
-                        Payments Received
-                    </span>
-
-                    <span>
-                        <i class="dot red-dot"></i>
-                        Overdue
-                    </span>
-                </div>
-
-                <div class="chart-area">
-                    <canvas id="activityChart"></canvas>
-                </div>
-            </div>
-
-            <div class="card chart-card">
-                <h3>Payment Status Breakdown</h3>
-
-                <div class="status-item">
-                    <div class="status-heading">
-                        <span>On Time (75%)</span>
-                        <span>$2,340</span>
-                    </div>
-                    <div class="progress">
-                        <div class="green" style="width:75%"></div>
-                    </div>
-                </div>
-
-                <div class="status-item">
-                    <div class="status-heading">
-                        <span>Pending (17%)</span>
-                        <span>$540</span>
-                    </div>
-                    <div class="progress">
-                        <div class="yellow" style="width:17%"></div>
-                    </div>
-                </div>
-
-                <div class="status-item">
-                    <div class="status-heading">
-                        <span>Overdue (8%)</span>
-                        <span>$240</span>
-                    </div>
-                    <div class="progress">
-                        <div class="red" style="width:8%"></div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- TABLA -->
-        <section class="table-container" id="clients">
-
-            <div class="table-title">
-                Recent Credit Transactions
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer Name</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody id="transactionBody"></tbody>
-            </table>
-
-            <div class="pagination" id="pagination"></div>
-
-        </section>
-
-    </main>
-
-    <footer id="contact">
-        FIA'O Reports © 2026 - Financial Management Dashboard
-    </footer>
-
-    <!-- Conectar JavaScript -->
-    <script src="reports.js"></script>
-
+  <script src="reports.js"></script>
 </body>
 </html>
