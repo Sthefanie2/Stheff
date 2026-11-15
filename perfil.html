@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FIA'O | Dashboard</title>
+
+    <!-- PROTECCIÓN DE SESIÓN: si no hay sesión, vuelve al login -->
+    <script src="cuentas.js"></script>
+    <script>
+        if (!Auth.currentUser()) {
+            window.location.replace('login.html');
+        }
+    </script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="perfil.css">
@@ -44,11 +51,13 @@
 
             <a href="products.html">Products</a>
 
-            <a href="clients.css">Clients</a>
+            <!-- CORREGIDO: antes decía clients.css -->
+            <a href="client.html">Clients</a>
 
             <a href="reports.html">Reports</a>
 
-            <a href="contact.css">Contact</a>
+            <!-- CORREGIDO: antes decía contact.css -->
+            <a href="contact.html">Contact</a>
 
         </nav>
 
@@ -689,6 +698,9 @@
     ====================================== -->
 
     <script src="perfil.js"></script>
+
+    <!-- Va DESPUÉS de perfil.js: pone el nombre real y el cierre de sesión -->
+    <script src="cerrar sesion.js"></script>
 
 </body>
 

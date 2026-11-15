@@ -1,212 +1,95 @@
+// Cambia este nombre si tu página de perfil se llama distinto
+const PROFILE_PAGE = 'perfil.html';
 
-// ============================================
-// FIA'O - REGISTRO DE USUARIOS
-// ============================================
+const form = document.getElementById('signupForm');
+const formMessage = document.getElementById('formMessage');
 
-const form = document.getElementById("signupForm");
-const message = document.getElementById("formMessage");
-const submitButton = form.querySelector('button[type="submit"]');
+const fields = {
+  fullname: document.getElementById('fullname'),
+  email: document.getElementById('email'),
+  phone: document.getElementById('phone'),
+  business: document.getElementById('business'),
+  password: document.getElementById('password'),
+  confirm: document.getElementById('confirm')
+};
 
-// Identificadores reales de tu HTML
-const fieldIds = [
-    "fullname",
-    "email",
-    "phone",
-    "business",
-    "password",
-    "confirm"
-];
-
-// Claves compartidas con login.js
-const USERS_KEY = "fiao-users-v1";
-
-// ============================================
-// FUNCIONES AUXILIARES
-// ============================================
-
-function getUsers() {
-    try {
-        return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-    } catch {
-        return [];
-    }
-}
-
-async function hashPassword(password) {
-    const data = new TextEncoder().encode(password);
-    const hash = await crypto.subtle.digest("SHA-256", data);
-
-    return Array.from(new Uint8Array(hash))
-        .map(byte => byte.toString(16).padStart(2, "0"))
-        .join("");
-}
-
-function showError(id, text) {
-    const input = document.getElementById(id);
-    const error = input.parentElement.querySelector(".form__error");
-
-    input.classList.toggle("invalid", Boolean(text));
-
-    if (error) {
-        error.textContent = text;
-    }
+// Muestra u oculta el error debajo de cada campo (el <small class="form__error">)
+function setError(input, text) {
+  const small = input.closest('.form__group').querySelector('.form__error');
+  small.textContent = text;
 }
 
 function clearErrors() {
-    fieldIds.forEach(id => showError(id, ""));
-
-    message.textContent = "";
-    message.className = "form__message";
+  Object.values(fields).forEach(input => setError(input, ''));
+  formMessage.textContent = '';
+  formMessage.style.color = '';
 }
 
-function showMessage(text, type) {
-    message.textContent = text;
-    message.className = "form__message " + type;
-}
+form.addEventListener('submit', async function (e) {
+  e.preventDefault(); // evita el POST que causaba el error 405
+  clearErrors();
 
-// ============================================
-// VALIDAR FORMULARIO
-// ============================================
+  const name = fields.fullname.value.trim();
+  const email = fields.email.value.trim();
+  const phone = fields.phone.value.trim();
+  const business = fields.business.value.trim();
+  const password = fields.password.value;
+  const confirm = fields.confirm.value;
+  let valid = true;
 
-function validateForm() {
+  if (!name) {
+    setError(fields.fullname, 'Enter your full name.');
+    valid = false;
+  }
 
-    clearErrors();
+  if (!email) {
+    setError(fields.email, 'Enter your email.');
+    valid = false;
+  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+    setError(fields.email, 'Enter a valid email.');
+    valid = false;
+  }
 
-    let valid = true;
+  const digits = phone.replace(/\D/g, '');
+  if (!phone) {
+    setError(fields.phone, 'Enter your phone number.');
+    valid = false;
+  } else if (digits.length < 7 || digits.length > 15) {
+    setError(fields.phone, 'Enter a valid phone number.');
+    valid = false;
+  }
 
-    const fullname = document.getElementById("fullname").value.trim();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const phone = document.getElementById("phone").value.trim();
-    const business = document.getElementById("business").value.trim();
-    const password = document.getElementById("password").value;
-    const confirm = document.getElementById("confirm").value;
+  if (!business) {
+    setError(fields.business, 'Enter your business name.');
+    valid = false;
+  }
 
-    if (fullname.length < 2) {
-        showError("fullname", "Enter your full name.");
-        valid = false;
-    }
+  if (!password) {
+    setError(fields.password, 'Enter a password.');
+    valid = false;
+  } else if (password.length < 6) {
+    setError(fields.password, 'Use at least 6 characters.');
+    valid = false;
+  }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        showError("email", "Enter a valid email.");
-        valid = false;
-    }
+  if (!confirm) {
+    setError(fields.confirm, 'Confirm your password.');
+    valid = false;
+  } else if (password !== confirm) {
+    setError(fields.confirm, 'Passwords do not match.');
+    valid = false;
+  }
 
-    const cleanPhone = phone.replace(/[\s()+.-]/g, "");
+  if (!valid) return;
 
-    if (!/^\d{7,15}$/.test(cleanPhone)) {
-        showError("phone", "Enter a valid phone number.");
-        valid = false;
-    }
+  const result = await Auth.register(name, email, password, { phone, business });
 
-    if (business.length < 2) {
-        showError("business", "Enter your business name.");
-        valid = false;
-    }
+  if (!result.ok) {
+    setError(fields.email, result.error);
+    return;
+  }
 
-    if (password.length < 8) {
-        showError("password", "Password must contain at least 8 characters.");
-        valid = false;
-    }
-
-    if (password !== confirm || !confirm) {
-        showError("confirm", "Passwords do not match.");
-        valid = false;
-    }
-
-    return valid;
-}
-
-// ============================================
-// REGISTRAR USUARIO
-// ============================================
-
-form.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    if (!validateForm()) {
-        const firstInvalid = form.querySelector(".invalid");
-        if (firstInvalid) firstInvalid.focus();
-        return;
-    }
-
-    submitButton.disabled = true;
-    submitButton.textContent = "Creating account...";
-
-    try {
-
-        const fullname = document.getElementById("fullname").value.trim();
-        const email = document.getElementById("email").value.trim().toLowerCase();
-        const phone = document.getElementById("phone").value.trim();
-        const business = document.getElementById("business").value.trim();
-        const password = document.getElementById("password").value;
-
-        const users = getUsers();
-
-        // Comprobar si el correo ya está registrado
-        const existingUser = users.find(user => user.email === email);
-
-        if (existingUser) {
-            showError("email", "This email is already registered.");
-            showMessage("An account with this email already exists.", "failure");
-            return;
-        }
-
-        // Crear nuevo usuario
-        const newUser = {
-            id: Date.now().toString(),
-            fullname: fullname,
-            email: email,
-            phone: phone,
-            business: business,
-            passwordHash: await hashPassword(password),
-            createdAt: new Date().toISOString()
-        };
-
-        users.push(newUser);
-
-        localStorage.setItem(USERS_KEY, JSON.stringify(users));
-
-        showMessage(
-            "Account created successfully! Redirecting to login...",
-            "success"
-        );
-
-        form.reset();
-
-        setTimeout(() => {
-            window.location.href = "login.html";
-        }, 1500);
-
-    } catch (error) {
-
-        console.error(error);
-
-        showMessage(
-            "Unable to create account. Please try again.",
-            "failure"
-        );
-
-    } finally {
-
-        submitButton.disabled = false;
-        submitButton.textContent = "Create My Account";
-
-    }
-
-});
-
-// ============================================
-// LIMPIAR ERRORES AL ESCRIBIR
-// ============================================
-
-fieldIds.forEach(id => {
-
-    const input = document.getElementById(id);
-
-    input.addEventListener("input", () => {
-        showError(id, "");
-        message.textContent = "";
-    });
-
+  formMessage.textContent = 'Account created! Redirecting to your profile…';
+  formMessage.style.color = 'green';
+  setTimeout(() => { window.location.href = PROFILE_PAGE; }, 800);
 });
