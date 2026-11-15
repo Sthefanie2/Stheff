@@ -1,153 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIA´O | Log In</title>
- 
-  <!-- Fuente Poppins -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
- 
- <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIAÓ - Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
- 
-  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
-<header class="navbar">
-<a href="index.html" class="navbar__logo">FIA<span>´O</span></a>
- 
-    <nav class="navbar__menu">
-<a href="index.html" class="nav-link active">Home</a>
-<a href="credit.html" class="nav-link">Credit</a>
-<a href="products.html" class="nav-link">Products</a>
-<a href="client.html" class="nav-link">Clients</a>
-<a href="reports.html" class="nav-link">Reports</a>
-<a href="contact.html" class="nav-link">Contact</a>
-</nav>
-</header>
- 
-  <!-- ============ SECCIÓN PRINCIPAL ============ -->
-<main class="hero">
-<div class="shape shape--yellow"></div>
-<div class="shape shape--red"></div>
- 
-    <!-- Lado izquierdo: información -->
-<section class="hero__info">
-<h2 class="brand">FIA<span>´</span>O</h2>
- 
-      <h1 class="hero__title">
 
-        We are innovation with <br>
-<span>purpose</span>
-</h1>
-<p class="hero__subtitle">Technology at the service of small businesses</p>
- 
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <a href="login.html" class="nav-logo">FIA<span class="o">Ó</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="credit.html">Credit</a>
+      <a href="productos.html">Products</a>
+      <a href="clientes.html">Clients</a>
+      <a href="reports.html">Reports</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <span class="shape shape-yellow"></span>
+    <span class="shape shape-red"></span>
+
+    <!-- LADO IZQUIERDO -->
+    <section class="info">
+      <h2 class="brand">FIAÓ</h2>
+      <h1>We are innovation with <span>purpose</span></h1>
+      <p class="subtitle">Technology at the service of small businesses</p>
+
       <ul class="features">
-<li class="feature">
-<svg class="feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M3 3v18h18"/>
-<path d="M8 17v-4M12 17V9M16 17v-6M20 17v-9"/>
-</svg>
-<div>
-<h3>Total Control</h3>
-<p>Manage your inventory, sales, and debts all from one place</p>
-</div>
-</li>
- 
-        <li class="feature">
-<svg class="feature__icon" viewBox="0 0 24 24" fill="currentColor">
-<path d="M12 2 3 5.5v6c0 5.2 3.6 9.9 9 11.5 5.4-1.6 9-6.3 9-11.5v-6L12 2Zm0 2.1 7 2.7v4.7c0 4.1-2.7 7.9-7 9.4V4.1Z"/>
-</svg>
-<div>
-<h3>More Security</h3>
-<p>Digitize the credit and keep track of your customers safely</p>
-</div>
-</li>
- 
-        <li class="feature">
-<svg class="feature__icon" viewBox="0 0 24 24" fill="currentColor">
-<circle cx="12" cy="7" r="3.2"/>
-<circle cx="4.5" cy="9.5" r="2.2"/>
-<circle cx="19.5" cy="9.5" r="2.2"/>
-<path d="M12 11.5c-3.2 0-6 1.700-6 4.500V19h12v-3c0-2.800-2.800-4.500-6-4.500Z"/>
-<path d="M4.500 12.500C2.600 12.500 1 13.700 1 15.500V18h3.500v-2c0-1.300.5-2.500 1.400-3.300-.4-.1-.9-.2-1.400-.2Z"/>
-<path d="M19.500 12.500c1.900 0 3.500 1.200 3.500 3V18h-3.500v-2c0-1.300-.5-2.500-1.400-3.300.4-.1.900-.2 1.400-.2Z"/>
-</svg>
-<div>
-<h3>Better Relationships</h3>
-<p>Transparency and trust between you and your clients</p>
-</div>
-</li>
-</ul>
-</section>
- 
-    <!-- Lado derecho: formulario de login -->
-<section class="login">
-<div class="login__card">
-<h2 class="login__title">Log In</h2>
-<p class="login__subtitle">Enter your credentials</p>
- 
-        <form id="loginForm" novalidate>
- 
-          <!-- Email -->
-<div class="field">
-<label for="email">Email</label>
-<div class="input-box">
-<svg class="input-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<rect x="3" y="5" width="18" height="14" rx="2"/>
-<path d="m3 7 9 6 9-6"/>
-</svg>
-<input type="email" id="email" name="email" placeholder="example@domain.com" autocomplete="email">
-</div>
-<small class="error" id="emailError"></small>
-</div>
- 
-          <!-- Password -->
-<div class="field">
-<label for="password">Password</label>
-<div class="input-box">
-<svg class="input-box__icon" viewBox="0 0 24 24" fill="currentColor">
-<path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM10 7a2 2 0 0 1 4 0v2h-4V7Z"/>
-</svg>
-<input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
-</div>
-<a href="#" class="forgot" id="forgotLink">You forgot your password?</a>
-<small class="error" id="passwordError"></small>
-</div>
- 
-          <button type="submit" class="btn-login">Log In</button>
- 
-          <!-- reCAPTCHA (visual). Para uno real, reemplaza este bloque por:
-<div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" fill="none" stroke="currentColor" stroke-width="2"/><rect x="7" y="12" width="2.5" height="6"/><rect x="11" y="8" width="2.5" height="10"/><rect x="15" y="10" width="2.5" height="8"/></svg>
+          <div><h3>Total Control</h3><p>Manage your inventory, sales, and debts all from one place</p></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v20c4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+          <div><h3>More Security</h3><p>Digitize the credit and keep track of your customers safely</p></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="9" r="2.3"/><circle cx="19" cy="9" r="2.3"/><path d="M7 20v-3c0-2.2 2.2-4 5-4s5 1.8 5 4v3Z"/><path d="M1 19v-2c0-1.4 1.6-2.5 3.5-2.5-.9.9-1.5 2-1.5 3.5v1Z"/><path d="M23 19v-2c0-1.4-1.6-2.5-3.5-2.5.9.9 1.5 2 1.5 3.5v1Z"/></svg>
+          <div><h3>Better Relationships</h3><p>Transparency and trust between you and your clients</p></div>
+        </li>
+      </ul>
+    </section>
 
-               y agrega <script src="https://www.google.com/recaptcha/api.js"></script> -->
-<div class="captcha">
-<label class="captcha__check">
-<input type="checkbox" id="captcha">
-<span class="captcha__box"></span>
-<span class="captcha__text">I'm not a robot</span>
-</label>
-<div class="captcha__logo">
-<svg viewBox="0 0 24 24" width="26" height="26">
-<path fill="#1c6ff0" d="M12 2 4 5.500v6c0 4.900 3.400 9.300 8 10.500V2Z"/>
-<path fill="#2f86ff" d="M12 2v20c4.600-1.200 8-5.600 8-10.500v-6L12 2Z" opacity=".75"/>
-</svg>
-<span>reCAPTCHA</span>
-</div>
-</div>
-<small class="error" id="captchaError"></small>
-</form>
- 
-        <p class="login__footer">Don't you have an account?</p>
-<a href="signup.html" class="login__signup" id="signupLink">Sign Up</a>
-</div>
-</section>
-</main>
- 
-  <!-- auth.js va PRIMERO, luego login.js -->
-  <script src="cuentas.js"></script>
+    <!-- TARJETA DE LOGIN -->
+    <section class="card">
+      <h2>Log In</h2>
+      <p class="card-sub">Enter your credentials</p>
+
+      <form id="loginForm" novalidate>
+        <label for="email">Email</label>
+        <div class="field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="email" id="email" placeholder="example@domain.com" autocomplete="email">
+        </div>
+
+        <label for="password">Password</label>
+        <div class="field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="toggle-pw" aria-label="Show password">
+            <svg class="eye-on" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7c2 0 3.8.6 5.300 1.500M23 12s-4 7-11 7c-2 0-3.800-.6-5.300-1.500M3 3l18 18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+        <a href="#" id="forgotLink" class="forgot">You forgot your password?</a>
+
+        <p id="loginError" class="error" role="alert"></p>
+
+        <button type="submit" class="btn">Log In</button>
+
+        <!-- Casilla tipo reCAPTCHA -->
+        <div class="captcha">
+          <label class="captcha-check">
+            <input type="checkbox" id="captcha">
+            <span class="box"></span>
+            <span>I'm not a robot</span>
+          </label>
+          <div class="captcha-logo">
+            <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z" fill="#1a73e8"/><path d="M12 2v20c4.6-1.7 8-6 8-11V5l-8-3Z" fill="#4285f4"/></svg>
+            <small>reCAPTCHA</small>
+          </div>
+        </div>
+      </form>
+
+      <p class="signup-text">Don't you have an account?</p>
+      <a href="signup.html" class="signup">Sign Up</a>
+    </section>
+  </main>
+
+  <!-- MODAL: RESTAURAR CONTRASEÑA -->
+  <div class="modal" id="resetModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-labelledby="resetTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+      <h2 id="resetTitle">Reset password</h2>
+      <p class="card-sub">Enter your email and choose a new password</p>
+
+      <form id="resetForm" novalidate>
+        <label for="resetEmail">Email</label>
+        <div class="field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="email" id="resetEmail" placeholder="example@domain.com">
+        </div>
+
+        <label for="newPassword">New password</label>
+        <div class="field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="password" id="newPassword" placeholder="••••••••">
+          <button type="button" class="toggle-pw" aria-label="Show password">
+            <svg class="eye-on" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7c2 0 3.8.6 5.300 1.500M23 12s-4 7-11 7c-2 0-3.800-.6-5.300-1.500M3 3l18 18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+
+        <label for="confirmPassword">Confirm password</label>
+        <div class="field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="password" id="confirmPassword" placeholder="••••••••">
+          <button type="button" class="toggle-pw" aria-label="Show password">
+            <svg class="eye-on" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7c2 0 3.8.6 5.300 1.500M23 12s-4 7-11 7c-2 0-3.800-.6-5.300-1.500M3 3l18 18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+
+        <p id="resetMsg" class="error" role="alert"></p>
+        <button type="submit" class="btn">Reset password</button>
+      </form>
+    </div>
+  </div>
+
   <script src="login.js"></script>
 </body>
 </html>
