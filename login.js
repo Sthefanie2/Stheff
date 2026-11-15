@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // =====================================
-    // ELEMENTOS DEL HTML
+    // FIA'O - INICIO DE SESIÓN
     // =====================================
 
     const loginForm = document.getElementById("loginForm");
@@ -17,14 +17,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const captcha = document.getElementById("captcha");
 
     const forgotLink = document.getElementById("forgotLink");
-    const signupLink = document.getElementById("signupLink");
+
+    const USERS_KEY = "fiao-users-v1";
+    const SESSION_KEY = "fiao-session-v1";
 
     // =====================================
     // FUNCIONES AUXILIARES
     // =====================================
 
-    function showError(element, message) {
-        element.textContent = message;
+    function getUsers() {
+        try {
+            return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+        } catch {
+            return [];
+        }
+    }
+
+    async function hashPassword(password) {
+
+        const data = new TextEncoder().encode(password);
+
+        const hash = await crypto.subtle.digest("SHA-256", data);
+
+        return Array.from(new Uint8Array(hash))
+            .map(byte => byte.toString(16).padStart(2, "0"))
+            .join("");
+    }
+
+    function validEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
     }
 
     function clearErrors() {
@@ -33,17 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
         captchaError.textContent = "";
     }
 
-    function validEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-
-    function showNotification(message, type = "success") {
+    function showNotification(text, type = "success") {
 
         let notification = document.getElementById("notification");
 
         if (!notification) {
+
             notification = document.createElement("div");
+
             notification.id = "notification";
 
             notification.style.padding = "12px";
@@ -55,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loginForm.appendChild(notification);
         }
 
-        notification.textContent = message;
+        notification.textContent = text;
 
         notification.style.background =
             type === "error" ? "#fee2e2" : "#dcfce7";
@@ -65,66 +83,124 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================================
-    // VALIDACIÓN DEL LOGIN
+    // INICIAR SESIÓN
     // =====================================
 
-    loginForm.addEventListener("submit", function(event) {
+    loginForm.addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
         clearErrors();
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
 
         let valid = true;
 
-        // Validar correo
-
-        if (email === "") {
-            showError(emailError, "Please enter your email.");
+        if (!email) {
+            emailError.textContent = "Please enter your email.";
             valid = false;
 
         } else if (!validEmail(email)) {
-            showError(emailError, "Please enter a valid email.");
+            emailError.textContent = "Please enter a valid email.";
             valid = false;
         }
 
-        // Validar contraseña
-
-        if (password === "") {
-            showError(passwordError, "Please enter your password.");
-            valid = false;
-
-        } else if (password.length < 6) {
-            showError(passwordError, "Password must contain at least 6 characters.");
+        if (!password) {
+            passwordError.textContent = "Please enter your password.";
             valid = false;
         }
-
-        // Validar CAPTCHA
 
         if (!captcha.checked) {
-            showError(captchaError, "Please confirm that you are not a robot.");
+            captchaError.textContent =
+                "Please confirm that you are not a robot.";
+
             valid = false;
         }
 
-        if (!valid) {
-            return;
+        if (!valid) return;
+
+        const button = loginForm.querySelector(".btn-login");
+
+        button.disabled = true;
+        button.textContent = "Checking...";
+
+        try {
+
+            // Recuperar usuarios registrados
+            const users = getUsers();
+
+            // Buscar el correo
+            const user = users.find(item => item.email === email);
+
+            if (!user) {
+
+                showNotification(
+                    "No account found with this email.",
+                    "error"
+                );
+
+                return;
+            }
+
+            // Comprobar contraseña
+            const passwordHash = await hashPassword(password);
+
+            if (passwordHash !== user.passwordHash) {
+
+                showNotification(
+                    "Incorrect password. Please try again.",
+                    "error"
+                );
+
+                return;
+            }
+
+            // Crear sesión sin guardar la contraseña
+            const session = {
+                id: user.id,
+                fullname: user.fullname,
+                email: user.email,
+                phone: user.phone,
+                business: user.business,
+                loginAt: new Date().toISOString()
+            };
+
+            localStorage.setItem(
+                SESSION_KEY,
+                JSON.stringify(session)
+            );
+
+            showNotification(
+                "Welcome, " + user.fullname + "! Redirecting...",
+                "success"
+            );
+
+            // Cambia esta dirección si tu perfil tiene otro nombre
+            setTimeout(() => {
+                window.location.href = "profile.html";
+            }, 1200);
+
+        } catch (error) {
+
+            console.error(error);
+
+            showNotification(
+                "An error occurred. Please try again.",
+                "error"
+            );
+
+        } finally {
+
+            button.disabled = false;
+            button.textContent = "Log In";
+
         }
 
-        // Datos validados
-        showNotification("Login information validated successfully!");
-
-        console.log("Email:", email);
-
-        // IMPORTANTE:
-        // Aquí debes conectar tu backend para autenticar
-        // al usuario y comprobar su contraseña.
     });
 
-
     // =====================================
-    // LIMPIAR ERRORES AL ESCRIBIR
+    // LIMPIAR ERRORES
     // =====================================
 
     emailInput.addEventListener("input", () => {
@@ -138,7 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
     captcha.addEventListener("change", () => {
         captchaError.textContent = "";
     });
-
 
     // =====================================
     // RECUPERAR CONTRASEÑA
@@ -193,39 +268,40 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         const resetForm = document.getElementById("resetForm");
-        const resetEmail = document.getElementById("resetEmail");
-        const resetError = document.getElementById("resetError");
-        const resetMessage = document.getElementById("resetMessage");
-
-        // Enviar solicitud de recuperación
 
         resetForm.addEventListener("submit", function(e) {
 
             e.preventDefault();
 
-            const email = resetEmail.value.trim();
+            const email = document.getElementById("resetEmail").value.trim();
 
-            resetError.textContent = "";
-            resetMessage.textContent = "";
+            const user = getUsers().find(
+                item => item.email === email.toLowerCase()
+            );
+
+            const error = document.getElementById("resetError");
+            const result = document.getElementById("resetMessage");
+
+            error.textContent = "";
+            result.textContent = "";
 
             if (!validEmail(email)) {
-                resetError.textContent = "Please enter a valid email.";
+                error.textContent = "Please enter a valid email.";
                 return;
             }
 
-            resetMessage.textContent =
-                "If your account exists, you will receive instructions to reset your password.";
+            if (!user) {
+                error.textContent = "No account found with this email.";
+                return;
+            }
 
-            resetMessage.style.color = "#166534";
-            resetMessage.style.marginTop = "15px";
+            result.textContent =
+                "Your account was found. Password recovery requires a secure email service.";
 
-            console.log("Recovery requested for:", email);
+            result.style.color = "#166534";
+            result.style.marginTop = "15px";
 
-            // Aquí debes conectar el servicio de recuperación
-            // de contraseña de tu backend.
         });
-
-        // Regresar al login
 
         document.getElementById("backLogin").addEventListener("click", function(e) {
             e.preventDefault();
@@ -233,19 +309,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     });
-
-
-    // =====================================
-    // REDIRECCIÓN A REGISTRO
-    // =====================================
-
-    signupLink.addEventListener("click", function(event) {
-
-        // Permite que el enlace abra signup.html
-        // No necesita ninguna acción adicional.
-
-    });
-
 
     // =====================================
     // MOSTRAR / OCULTAR CONTRASEÑA
@@ -266,15 +329,12 @@ document.addEventListener("DOMContentLoaded", () => {
     togglePassword.addEventListener("click", () => {
 
         if (passwordInput.type === "password") {
-
             passwordInput.type = "text";
             togglePassword.textContent = "Hide";
 
         } else {
-
             passwordInput.type = "password";
             togglePassword.textContent = "Show";
-
         }
 
     });

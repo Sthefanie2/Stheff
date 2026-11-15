@@ -1,271 +1,212 @@
 
+// ============================================
+// FIA'O - REGISTRO DE USUARIOS
+// ============================================
+
 const form = document.getElementById("signupForm");
 const message = document.getElementById("formMessage");
-const submitButton = document.getElementById("submitButton");
+const submitButton = form.querySelector('button[type="submit"]');
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-// IDs of the form fields
+// Identificadores reales de tu HTML
 const fieldIds = [
-    "fullName",
+    "fullname",
     "email",
     "phone",
-    "businessName",
+    "business",
     "password",
-    "confirmPassword"
+    "confirm"
 ];
 
-// Show an error under a field
-function setError(id, text) {
+// Claves compartidas con login.js
+const USERS_KEY = "fiao-users-v1";
+
+// ============================================
+// FUNCIONES AUXILIARES
+// ============================================
+
+function getUsers() {
+    try {
+        return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    } catch {
+        return [];
+    }
+}
+
+async function hashPassword(password) {
+    const data = new TextEncoder().encode(password);
+    const hash = await crypto.subtle.digest("SHA-256", data);
+
+    return Array.from(new Uint8Array(hash))
+        .map(byte => byte.toString(16).padStart(2, "0"))
+        .join("");
+}
+
+function showError(id, text) {
     const input = document.getElementById(id);
-    const error = document.getElementById(id + "Error");
+    const error = input.parentElement.querySelector(".form__error");
 
     input.classList.toggle("invalid", Boolean(text));
-    error.textContent = text;
+
+    if (error) {
+        error.textContent = text;
+    }
 }
 
-// Clear all previous errors
 function clearErrors() {
-    fieldIds.forEach(id => setError(id, ""));
-
-    document.getElementById("termsError").textContent = "";
+    fieldIds.forEach(id => showError(id, ""));
 
     message.textContent = "";
-    message.className = "form-message";
+    message.className = "form__message";
 }
 
-// Validate all form fields
+function showMessage(text, type) {
+    message.textContent = text;
+    message.className = "form__message " + type;
+}
+
+// ============================================
+// VALIDAR FORMULARIO
+// ============================================
+
 function validateForm() {
+
     clearErrors();
 
     let valid = true;
 
-    const fullName =
-        document.getElementById("fullName").value.trim();
+    const fullname = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const phone = document.getElementById("phone").value.trim();
+    const business = document.getElementById("business").value.trim();
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm").value;
 
-    const email =
-        document.getElementById("email").value.trim();
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const businessName =
-        document.getElementById("businessName").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
-
-    const terms =
-        document.getElementById("terms").checked;
-
-    // Full name
-    if (fullName.length < 2) {
-        setError(
-            "fullName",
-            "Enter your full name (at least 2 characters)."
-        );
+    if (fullname.length < 2) {
+        showError("fullname", "Enter your full name.");
         valid = false;
     }
 
-    // Email format
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (!emailPattern.test(email)) {
-        setError("email", "Enter a valid email address.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        showError("email", "Enter a valid email.");
         valid = false;
     }
 
-    // Phone number
     const cleanPhone = phone.replace(/[\s()+.-]/g, "");
 
     if (!/^\d{7,15}$/.test(cleanPhone)) {
-        setError(
-            "phone",
-            "Enter a valid phone number with 7 to 15 digits."
-        );
+        showError("phone", "Enter a valid phone number.");
         valid = false;
     }
 
-    // Business name
-    if (businessName.length < 2) {
-        setError(
-            "businessName",
-            "Enter your business name."
-        );
+    if (business.length < 2) {
+        showError("business", "Enter your business name.");
         valid = false;
     }
 
-    // Password length
     if (password.length < 8) {
-        setError(
-            "password",
-            "Your password must contain at least 8 characters."
-        );
+        showError("password", "Password must contain at least 8 characters.");
         valid = false;
     }
 
-    // Confirm password
-    if (!confirmPassword || password !== confirmPassword) {
-        setError(
-            "confirmPassword",
-            "Passwords do not match."
-        );
+    if (password !== confirm || !confirm) {
+        showError("confirm", "Passwords do not match.");
         valid = false;
-    }
-
-    // Terms and conditions
-    if (!terms) {
-        document.getElementById("termsError").textContent =
-            "Please accept the terms to continue.";
-
-        valid = false;
-    }
-
-    // Show general error
-    if (!valid) {
-        message.textContent =
-            "Please review the highlighted fields.";
-
-        message.className = "form-message failure";
     }
 
     return valid;
 }
 
-// Submit form
-form.addEventListener("submit", function(event) {
+// ============================================
+// REGISTRAR USUARIO
+// ============================================
+
+form.addEventListener("submit", async function(event) {
+
     event.preventDefault();
 
     if (!validateForm()) {
         const firstInvalid = form.querySelector(".invalid");
-
-        if (firstInvalid) {
-            firstInvalid.focus();
-        }
-
+        if (firstInvalid) firstInvalid.focus();
         return;
     }
 
-    // Demonstration only: no account is actually created.
     submitButton.disabled = true;
-    submitButton.textContent = "Checking details...";
+    submitButton.textContent = "Creating account...";
 
-    window.setTimeout(function() {
-        message.textContent =
-            "Validation successful! Connect a secure server to create your account.";
+    try {
 
-        message.className = "form-message success";
+        const fullname = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const phone = document.getElementById("phone").value.trim();
+        const business = document.getElementById("business").value.trim();
+        const password = document.getElementById("password").value;
+
+        const users = getUsers();
+
+        // Comprobar si el correo ya está registrado
+        const existingUser = users.find(user => user.email === email);
+
+        if (existingUser) {
+            showError("email", "This email is already registered.");
+            showMessage("An account with this email already exists.", "failure");
+            return;
+        }
+
+        // Crear nuevo usuario
+        const newUser = {
+            id: Date.now().toString(),
+            fullname: fullname,
+            email: email,
+            phone: phone,
+            business: business,
+            passwordHash: await hashPassword(password),
+            createdAt: new Date().toISOString()
+        };
+
+        users.push(newUser);
+
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+
+        showMessage(
+            "Account created successfully! Redirecting to login...",
+            "success"
+        );
+
+        form.reset();
+
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "Unable to create account. Please try again.",
+            "failure"
+        );
+
+    } finally {
 
         submitButton.disabled = false;
         submitButton.textContent = "Create My Account";
-    }, 500);
+
+    }
+
 });
 
-// Remove a field's error while the user types
-fieldIds.forEach(function(id) {
+// ============================================
+// LIMPIAR ERRORES AL ESCRIBIR
+// ============================================
+
+fieldIds.forEach(id => {
+
     const input = document.getElementById(id);
 
-    input.addEventListener("input", function() {
-        input.classList.remove("invalid");
-
-        const error = document.getElementById(id + "Error");
-        error.textContent = "";
-
+    input.addEventListener("input", () => {
+        showError(id, "");
         message.textContent = "";
-        message.className = "form-message";
     });
+
 });
-
-// Clear the terms error when checked
-document.getElementById("terms").addEventListener(
-    "change",
-    function() {
-        document.getElementById("termsError").textContent = "";
-    }
-);
-
-// Show or hide passwords
-document.querySelectorAll(".toggle-password").forEach(
-    function(button) {
-        button.addEventListener("click", function() {
-            const input = document.getElementById(
-                button.dataset.target
-            );
-
-            if (input.type === "password") {
-                input.type = "text";
-                button.textContent = "Hide";
-            } else {
-                input.type = "password";
-                button.textContent = "Show";
-            }
-        });
-    }
-);
-
-// Mobile navigation
-menuToggle.addEventListener("click", function() {
-    const isOpen = navLinks.classList.toggle("open");
-
-    menuToggle.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-    );
-
-    menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
-    );
-});
-
-// Navigation button behavior
-document.querySelectorAll(".nav-button").forEach(
-    function(link) {
-        link.addEventListener("click", function() {
-            document.querySelectorAll(".nav-button").forEach(
-                function(button) {
-                    button.classList.remove("active");
-                }
-            );
-
-            link.classList.add("active");
-
-            navLinks.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-            menuToggle.setAttribute("aria-label", "Open navigation");
-
-            const destination = link.getAttribute("href");
-
-            if (destination !== "#home") {
-                message.textContent =
-                    link.textContent +
-                    " is a navigation placeholder. Its page still needs to be created.";
-
-                message.className = "form-message";
-            } else {
-                message.textContent = "";
-                message.className = "form-message";
-            }
-        });
-    }
-);
-
-// Sign-in placeholder
-document.getElementById("loginLink").addEventListener(
-    "click",
-    function(event) {
-        event.preventDefault();
-
-        message.textContent =
-            "The sign-in page has not been created yet.";
-
-        message.className = "form-message";
-    }
-);
