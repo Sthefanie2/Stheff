@@ -1,459 +1,140 @@
+/* ===== DATOS (reemplaza esto luego con tu API / base de datos) ===== */
+const stats = [
+  { icon: "users",   value: 128,   key: "stat_customers" },
+  { icon: "package", value: 254,   key: "stat_products" },
+  { icon: "wallet",  value: 1250,  key: "stat_credits",  money: true },
+  { icon: "banknote", value: 320,  key: "stat_payments", money: true },
+];
 
+const activity = [
+  { name: "John Smith",   type: "payment",  amount: 25, when: "today" },
+  { name: "Maria Lopez",  type: "credit",   amount: 18, when: "today" },
+  { name: "Carlos Perez", type: "reminder", amount: null, when: "yesterday" },
+];
+
+const typeStyle = {
+  payment:  { icon: "banknote",   color: "green",  key: "act_payment" },
+  credit:   { icon: "hand-coins", color: "red",    key: "act_credit" },
+  reminder: { icon: "bell-ring",  color: "orange", key: "act_reminder" },
+};
+
+/* ===== TRADUCCIONES ===== */
+const i18n = {
+  en: {
+    nav_home: "Home", nav_credit: "Credit", nav_products: "Products", nav_clients: "Clients", nav_reports: "Reports", nav_contact: "Contact",
+    welcome: "Welcome,", subtitle: "Everything you need to manage your business is right here.",
+    m_profile: "My Profile", m_edit: "Edit Profile", m_picture: "Change Profile Picture", m_theme: "Theme",
+    m_language: "Language", m_notifications: "Notifications", m_settings: "Settings", m_logout: "Log Out",
+    c1_title: "Customers", c1_text: "Manage customer information and debts.",
+    c2_title: "Products", c2_text: "Manage inventory and product prices.",
+    c3_title: "Credits & Payments", c3_text: "Register credits, payments and customer balances.",
+    c4_title: "Reports", c4_text: "View statistics and financial reports.",
+    stats_title: "Quick Statistics", activity_title: "Recent Activity",
+    stat_customers: "Customers", stat_products: "Products", stat_credits: "Credits", stat_payments: "Payments today",
+    act_payment: "Payment received", act_credit: "New credit registered", act_reminder: "Debt reminder sent",
+    today: "Today", yesterday: "Yesterday", logout_confirm: "Do you want to log out?",
+  },
+  es: {
+    nav_home: "Inicio", nav_credit: "Crédito", nav_products: "Productos", nav_clients: "Clientes", nav_reports: "Reportes", nav_contact: "Contacto",
+    welcome: "Bienvenida,", subtitle: "Todo lo que necesitas para administrar tu negocio está aquí.",
+    m_profile: "Mi perfil", m_edit: "Editar perfil", m_picture: "Cambiar foto de perfil", m_theme: "Tema",
+    m_language: "Idioma", m_notifications: "Notificaciones", m_settings: "Configuración", m_logout: "Cerrar sesión",
+    c1_title: "Clientes", c1_text: "Administra la información y las deudas de tus clientes.",
+    c2_title: "Productos", c2_text: "Administra el inventario y los precios.",
+    c3_title: "Créditos y pagos", c3_text: "Registra créditos, pagos y saldos de clientes.",
+    c4_title: "Reportes", c4_text: "Consulta estadísticas y reportes financieros.",
+    stats_title: "Estadísticas rápidas", activity_title: "Actividad reciente",
+    stat_customers: "Clientes", stat_products: "Productos", stat_credits: "Créditos", stat_payments: "Pagos de hoy",
+    act_payment: "Pago recibido", act_credit: "Nuevo crédito registrado", act_reminder: "Recordatorio de deuda enviado",
+    today: "Hoy", yesterday: "Ayer", logout_confirm: "¿Quieres cerrar sesión?",
+  },
+};
+
+let lang = localStorage.getItem("fiao-lang") || "en";
+const t = (key) => i18n[lang][key] || key;
+const money = (n) => "B/. " + n.toLocaleString("en-US");
+
+/* ===== RENDER ===== */
+function renderStats() {
+  document.getElementById("stats").innerHTML = stats.map(s => `
+    <article class="card stat">
+      <span class="icon"><i data-lucide="${s.icon}"></i></span>
+      <strong>${s.money ? money(s.value) : s.value}</strong>
+      <span class="label">${t(s.key)}</span>
+    </article>`).join("");
+}
+
+function renderActivity() {
+  document.getElementById("activityList").innerHTML = activity.map(a => {
+    const st = typeStyle[a.type];
+    const when = t(a.when) + (a.amount ? ` • B/.${a.amount}` : "");
+    return `
+      <li>
+        <span class="icon ${st.color}"><i data-lucide="${st.icon}"></i></span>
+        <div class="who"><strong>${a.name}</strong><small>${t(st.key)}</small></div>
+        <span class="when">${when}</span>
+      </li>`;
+  }).join("");
+}
+
+function applyLanguage() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  renderStats();
+  renderActivity();
+  lucide.createIcons();
+}
+
+/* ===== TEMA ===== */
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("fiao-theme", theme);
+}
+
+/* ===== MENÚ DE USUARIO ===== */
+const userBtn = document.getElementById("userBtn");
+const userMenu = document.getElementById("userMenu");
+
+function toggleMenu(open) {
+  userMenu.hidden = !open;
+  userBtn.setAttribute("aria-expanded", open);
+}
+
+/* ===== INIT ===== */
 document.addEventListener("DOMContentLoaded", () => {
-
-    // =====================================
-    // 1. IDENTIFICAR USUARIO
-    // =====================================
-
-    const currentUser = JSON.parse(
-        localStorage.getItem("currentUser") || "null"
-    );
-
-    if (!currentUser) {
-        window.location.href = "index.html";
-        return;
-    }
-
-    let userName = currentUser.name || "User";
-    let businessName = currentUser.business || "My Business";
-
-    const $ = id => document.getElementById(id);
-
-
-    // =====================================
-    // 2. MOSTRAR NOMBRE DEL USUARIO
-    // =====================================
-
-    function updateProfile() {
-
-        $("userName").textContent = userName;
-        $("profileName").textContent = userName;
-        $("dropdownName").textContent = userName;
-        $("businessName").textContent = businessName;
-
-        $("avatarLetter").textContent =
-            userName.charAt(0).toUpperCase();
-
-    }
-
-    updateProfile();
-
-
-    // =====================================
-    // 3. MENU DEL PERFIL
-    // =====================================
-
-    const profileButton = $("profileButton");
-    const profileDropdown = $("profileDropdown");
-
-    profileButton.addEventListener("click", event => {
-
-        event.stopPropagation();
-
-        profileDropdown.classList.toggle("show");
-
-    });
-
-    document.addEventListener("click", event => {
-
-        if (
-            !profileDropdown.contains(event.target) &&
-            !profileButton.contains(event.target)
-        ) {
-
-            profileDropdown.classList.remove("show");
-
-        }
-
-    });
-
-
-    // =====================================
-    // 4. EDITAR PERFIL Y CONFIGURACIONES
-    // =====================================
-
-    let language = localStorage.getItem("fiaLanguage") || "en";
-
-    document.querySelectorAll("[data-action]").forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const action = button.dataset.action;
-
-            switch (action) {
-
-                // MY PROFILE
-
-                case "profile":
-
-                    alert(
-                        "MY PROFILE\n\n" +
-                        "Name: " + userName + "\n" +
-                        "Email: " + (currentUser.email || "") +
-                        "\nBusiness: " + businessName
-                    );
-
-                    break;
-
-
-                // EDIT PROFILE
-
-                case "edit": {
-
-                    const newName = prompt(
-                        "Enter your full name:",
-                        userName
-                    );
-
-                    if (newName && newName.trim()) {
-
-                        userName = newName.trim();
-                        currentUser.name = userName;
-
-                        saveUser();
-                        updateProfile();
-
-                    }
-
-                    break;
-                }
-
-
-                // CHANGE PICTURE
-
-                case "picture":
-
-                    $("pictureInput").click();
-
-                    break;
-
-
-                // DARK MODE
-
-                case "theme":
-
-                    document.body.classList.toggle("dark");
-
-                    localStorage.setItem(
-                        "fiaTheme",
-                        document.body.classList.contains("dark")
-                            ? "dark"
-                            : "light"
-                    );
-
-                    break;
-
-
-                // LANGUAGE
-
-                case "language":
-
-                    language = language === "en" ? "es" : "en";
-
-                    localStorage.setItem("fiaLanguage", language);
-
-                    applyLanguage();
-
-                    break;
-
-
-                // NOTIFICATIONS
-
-                case "notifications":
-
-                    alert(
-                        language === "en"
-                            ? "You have no new notifications."
-                            : "No tienes notificaciones nuevas."
-                    );
-
-                    break;
-
-
-                // SETTINGS
-
-                case "settings": {
-
-                    const newBusiness = prompt(
-                        "Enter your business name:",
-                        businessName
-                    );
-
-                    if (newBusiness && newBusiness.trim()) {
-
-                        businessName = newBusiness.trim();
-
-                        currentUser.business = businessName;
-
-                        saveUser();
-                        updateProfile();
-
-                    }
-
-                    break;
-                }
-
-
-                // LOG OUT
-
-                case "logout": {
-
-                    const confirmLogout = confirm(
-                        language === "en"
-                            ? "Are you sure you want to log out?"
-                            : "¿Estás seguro de que deseas cerrar sesión?"
-                    );
-
-                    if (confirmLogout) {
-
-                        localStorage.removeItem("currentUser");
-
-                        window.location.href = "index.html";
-
-                    }
-
-                    break;
-                }
-
-            }
-
-            profileDropdown.classList.remove("show");
-
-        });
-
-    });
-
-
-    // SAVE USER DATA
-
-    function saveUser() {
-
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(currentUser)
-        );
-
-    }
-
-
-    // =====================================
-    // 5. PROFILE PICTURE
-    // =====================================
-
-    const pictureInput = $("pictureInput");
-
-    const photoKey = "fiaPhoto_" + currentUser.email;
-
-    function displayPhoto(photo) {
-
-        $("avatar").innerHTML = "";
-
-        const img = document.createElement("img");
-
-        img.src = photo;
-        img.alt = "Profile picture";
-
-        $("avatar").appendChild(img);
-
-    }
-
-    const savedPhoto = localStorage.getItem(photoKey);
-
-    if (savedPhoto) {
-
-        displayPhoto(savedPhoto);
-
-    }
-
-    pictureInput.addEventListener("change", () => {
-
-        const file = pictureInput.files[0];
-
-        if (!file) return;
-
-        if (!file.type.startsWith("image/")) {
-
-            alert("Please select a valid image.");
-            return;
-
-        }
-
-        if (file.size > 1024 * 1024) {
-
-            alert("Image must be smaller than 1 MB.");
-            pictureInput.value = "";
-            return;
-
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = event => {
-
-            try {
-
-                localStorage.setItem(
-                    photoKey,
-                    event.target.result
-                );
-
-                displayPhoto(event.target.result);
-
-            } catch (error) {
-
-                alert("Unable to save this picture.");
-
-            }
-
-        };
-
-        reader.readAsDataURL(file);
-
-    });
-
-
-    // =====================================
-    // 6. DARK MODE
-    // =====================================
-
-    if (localStorage.getItem("fiaTheme") === "dark") {
-
-        document.body.classList.add("dark");
-
-    }
-
-
-    // =====================================
-    // 7. LANGUAGE ENGLISH / SPANISH
-    // =====================================
-
-    function applyLanguage() {
-
-        document.querySelectorAll("[data-en]").forEach(element => {
-
-            element.textContent = element.dataset[language];
-
-        });
-
-        $("languageLabel").textContent =
-            language === "en"
-                ? "Language (EN/ES)"
-                : "Idioma (EN/ES)";
-
-        $("chatInput").placeholder =
-            language === "en"
-                ? "Write a message..."
-                : "Escribe un mensaje...";
-
-        document.documentElement.lang = language;
-
-    }
-
+  applyTheme(localStorage.getItem("fiao-theme") || "light");
+  applyLanguage();
+
+  userBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleMenu(userMenu.hidden);
+  });
+  document.addEventListener("click", (e) => {
+    if (!userMenu.contains(e.target)) toggleMenu(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { toggleMenu(false); userBtn.focus(); }
+  });
+
+  document.getElementById("themeBtn").addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  });
+
+  document.getElementById("langBtn").addEventListener("click", () => {
+    lang = lang === "en" ? "es" : "en";
+    localStorage.setItem("fiao-lang", lang);
     applyLanguage();
+  });
 
-
-    // =====================================
-    // 8. CHAT OPEN / CLOSE
-    // =====================================
-
-    const chatButton = $("chatButton");
-    const chatWindow = $("chatWindow");
-
-    chatButton.addEventListener("click", () => {
-
-        chatWindow.classList.toggle("show");
-
-        if (chatWindow.classList.contains("show")) {
-
-            $("chatInput").focus();
-
-        }
-
-    });
-
-
-    // =====================================
-    // 9. CHAT MESSAGES
-    // =====================================
-
-    const chatInput = $("chatInput");
-    const chatMessages = $("chatMessages");
-    const sendButton = $("sendMessage");
-
-    function addMessage(message, type) {
-
-        const newMessage = document.createElement("div");
-
-        newMessage.classList.add("chat-message", type);
-
-        // textContent prevents HTML injection
-
-        newMessage.textContent = message;
-
-        chatMessages.appendChild(newMessage);
-
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    if (confirm(t("logout_confirm"))) {
+      // TODO: cerrar sesión real (borrar token / llamar a tu backend)
+      window.location.href = "login.html";
     }
+  });
 
-
-    // SEND MESSAGE
-
-    function sendMessage() {
-
-        const message = chatInput.value.trim();
-
-        if (message === "") return;
-
-        // Show user message
-
-        addMessage(message, "sent");
-
-        chatInput.value = "";
-
-        // Automatic demonstration response
-
-        setTimeout(() => {
-
-            let response;
-
-            if (language === "en") {
-
-                response =
-                    "Thank you for contacting FIA'O! " +
-                    "We have received your message. " +
-                    "Our support team will assist you.";
-
-            } else {
-
-                response =
-                    "¡Gracias por contactar a FIA'O! " +
-                    "Hemos recibido tu mensaje. " +
-                    "Nuestro equipo de soporte te ayudará.";
-
-            }
-
-            addMessage(response, "received");
-
-        }, 800);
-
-    }
-
-
-    sendButton.addEventListener("click", sendMessage);
-
-
-    chatInput.addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
-
-            event.preventDefault();
-
-            sendMessage();
-
-        }
-
-    });
-
-
+  document.getElementById("chatBtn").addEventListener("click", () => {
+    // TODO: abrir tu widget de chat / soporte
+    console.log("Chat abierto");
+  });
 });
