@@ -1,11 +1,15 @@
-// Cambia este nombre si tu página de perfil se llama distinto
-const PROFILE_PAGE = 'perfil.html';
+// ============================================================
+// FIA'O - Registro
+// Al crear la cuenta se guardan los datos en el navegador
+// (localStorage) y se redirige a la página de perfil.
+// ============================================================
+
+// Cambia este nombre si tu página de perfil se llama diferente
+const PROFILE_PAGE = 'profile.html';
 
 const form = document.getElementById('signupForm');
-const formMessage = document.getElementById('formMessage');
-
 const fields = {
-  fullname: document.getElementById('fullname'),
+  fullName: document.getElementById('fullName'),
   email: document.getElementById('email'),
   phone: document.getElementById('phone'),
   business: document.getElementById('business'),
@@ -13,83 +17,74 @@ const fields = {
   confirm: document.getElementById('confirm')
 };
 
-// Muestra u oculta el error debajo de cada campo (el <small class="form__error">)
-function setError(input, text) {
-  const small = input.closest('.form__group').querySelector('.form__error');
-  small.textContent = text;
+// ----- Icono del ojo: mostrar / ocultar contraseña -----
+document.querySelectorAll('.eye-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const input = document.getElementById(btn.dataset.target);
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    btn.classList.toggle('visible', show);
+    btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+  });
+});
+
+// ----- Errores -----
+function setError(input, message) {
+  const field = input.closest('.field');
+  field.querySelector('.error').textContent = message;
+  field.classList.add('has-error');
+  input.classList.add('invalid');
 }
 
-function clearErrors() {
-  Object.values(fields).forEach(input => setError(input, ''));
-  formMessage.textContent = '';
-  formMessage.style.color = '';
+function clearError(input) {
+  input.closest('.field').classList.remove('has-error');
+  input.classList.remove('invalid');
 }
 
-form.addEventListener('submit', async function (e) {
-  e.preventDefault(); // evita el POST que causaba el error 405
-  clearErrors();
+function validate() {
+  let valid = true;
+  Object.values(fields).forEach(clearError);
 
-  const name = fields.fullname.value.trim();
+  const name = fields.fullName.value.trim();
   const email = fields.email.value.trim();
   const phone = fields.phone.value.trim();
   const business = fields.business.value.trim();
-  const password = fields.password.value;
+  const pass = fields.password.value;
   const confirm = fields.confirm.value;
-  let valid = true;
 
-  if (!name) {
-    setError(fields.fullname, 'Enter your full name.');
-    valid = false;
+  if (name.length < 3) { setError(fields.fullName, 'Enter your full name'); valid = false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError(fields.email, 'Enter a valid email'); valid = false; }
+  if (!/^[0-9+\-\s()]{7,15}$/.test(phone)) { setError(fields.phone, 'Enter a valid phone number'); valid = false; }
+  if (business.length < 2) { setError(fields.business, 'Enter your business name'); valid = false; }
+  if (pass.length < 6) { setError(fields.password, 'Min. 6 characters'); valid = false; }
+  if (confirm === '' || confirm !== pass) { setError(fields.confirm, "Passwords don't match"); valid = false; }
+
+  return valid;
+}
+
+Object.values(fields).forEach((input) => {
+  input.addEventListener('input', () => clearError(input));
+});
+
+// ----- Crear cuenta -----
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  // Se guarda el usuario SIN la contraseña (profile.html lee esta clave)
+  const user = {
+    fullName: fields.fullName.value.trim(),
+    email: fields.email.value.trim(),
+    phone: fields.phone.value.trim(),
+    business: fields.business.value.trim(),
+    createdAt: new Date().toISOString()
+  };
+
+  try {
+    localStorage.setItem('fiaoUser', JSON.stringify(user));
+  } catch (err) {
+    console.error('No se pudo guardar en localStorage:', err);
   }
 
-  if (!email) {
-    setError(fields.email, 'Enter your email.');
-    valid = false;
-  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    setError(fields.email, 'Enter a valid email.');
-    valid = false;
-  }
-
-  const digits = phone.replace(/\D/g, '');
-  if (!phone) {
-    setError(fields.phone, 'Enter your phone number.');
-    valid = false;
-  } else if (digits.length < 7 || digits.length > 15) {
-    setError(fields.phone, 'Enter a valid phone number.');
-    valid = false;
-  }
-
-  if (!business) {
-    setError(fields.business, 'Enter your business name.');
-    valid = false;
-  }
-
-  if (!password) {
-    setError(fields.password, 'Enter a password.');
-    valid = false;
-  } else if (password.length < 6) {
-    setError(fields.password, 'Use at least 6 characters.');
-    valid = false;
-  }
-
-  if (!confirm) {
-    setError(fields.confirm, 'Confirm your password.');
-    valid = false;
-  } else if (password !== confirm) {
-    setError(fields.confirm, 'Passwords do not match.');
-    valid = false;
-  }
-
-  if (!valid) return;
-
-  const result = await Auth.register(name, email, password, { phone, business });
-
-  if (!result.ok) {
-    setError(fields.email, result.error);
-    return;
-  }
-
-  formMessage.textContent = 'Account created! Redirecting to your profile…';
-  formMessage.style.color = 'green';
-  setTimeout(() => { window.location.href = PROFILE_PAGE; }, 800);
+  window.location.href = PROFILE_PAGE;
 });
