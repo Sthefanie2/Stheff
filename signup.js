@@ -1,13 +1,13 @@
+
 // ============================================================
-// FIA'O - Registro
-// Al crear la cuenta se guardan los datos en el navegador
-// (localStorage) y se redirige a la página de perfil.
+// FIA'O - SISTEMA DE REGISTRO
+// Validación, almacenamiento y confirmación de cuenta
 // ============================================================
 
-// Cambia este nombre si tu página de perfil se llama diferente
 const PROFILE_PAGE = 'profile.html';
 
 const form = document.getElementById('signupForm');
+
 const fields = {
   fullName: document.getElementById('fullName'),
   email: document.getElementById('email'),
@@ -17,32 +17,58 @@ const fields = {
   confirm: document.getElementById('confirm')
 };
 
-// ----- Icono del ojo: mostrar / ocultar contraseña -----
+// ============================================================
+// MOSTRAR Y OCULTAR CONTRASEÑA
+// ============================================================
+
 document.querySelectorAll('.eye-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     const input = document.getElementById(btn.dataset.target);
+
     const show = input.type === 'password';
+
     input.type = show ? 'text' : 'password';
+
     btn.classList.toggle('visible', show);
-    btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+
+    btn.setAttribute(
+      'aria-label',
+      show ? 'Hide password' : 'Show password'
+    );
   });
 });
 
-// ----- Errores -----
+// ============================================================
+// MOSTRAR ERRORES
+// ============================================================
+
 function setError(input, message) {
   const field = input.closest('.field');
+
   field.querySelector('.error').textContent = message;
+
   field.classList.add('has-error');
+
   input.classList.add('invalid');
 }
 
 function clearError(input) {
-  input.closest('.field').classList.remove('has-error');
+  const field = input.closest('.field');
+
+  field.classList.remove('has-error');
+
+  field.querySelector('.error').textContent = '';
+
   input.classList.remove('invalid');
 }
 
+// ============================================================
+// VALIDAR FORMULARIO
+// ============================================================
+
 function validate() {
   let valid = true;
+
   Object.values(fields).forEach(clearError);
 
   const name = fields.fullName.value.trim();
@@ -52,27 +78,68 @@ function validate() {
   const pass = fields.password.value;
   const confirm = fields.confirm.value;
 
-  if (name.length < 3) { setError(fields.fullName, 'Enter your full name'); valid = false; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError(fields.email, 'Enter a valid email'); valid = false; }
-  if (!/^[0-9+\-\s()]{7,15}$/.test(phone)) { setError(fields.phone, 'Enter a valid phone number'); valid = false; }
-  if (business.length < 2) { setError(fields.business, 'Enter your business name'); valid = false; }
-  if (pass.length < 6) { setError(fields.password, 'Min. 6 characters'); valid = false; }
-  if (confirm === '' || confirm !== pass) { setError(fields.confirm, "Passwords don't match"); valid = false; }
+  // Nombre
+  if (name.length < 3) {
+    setError(fields.fullName, 'Enter your full name');
+    valid = false;
+  }
+
+  // Correo electrónico
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setError(fields.email, 'Enter a valid email');
+    valid = false;
+  }
+
+  // Teléfono
+  if (!/^[0-9+\-\s()]{7,15}$/.test(phone)) {
+    setError(fields.phone, 'Enter a valid phone number');
+    valid = false;
+  }
+
+  // Negocio
+  if (business.length < 2) {
+    setError(fields.business, 'Enter your business name');
+    valid = false;
+  }
+
+  // Contraseña
+  if (pass.length < 6) {
+    setError(fields.password, 'Min. 6 characters');
+    valid = false;
+  }
+
+  // Confirmar contraseña
+  if (confirm === '' || confirm !== pass) {
+    setError(fields.confirm, "Passwords don't match");
+    valid = false;
+  }
 
   return valid;
 }
 
+// ============================================================
+// LIMPIAR ERRORES AL ESCRIBIR
+// ============================================================
+
 Object.values(fields).forEach((input) => {
-  input.addEventListener('input', () => clearError(input));
+  input.addEventListener('input', () => {
+    clearError(input);
+  });
 });
 
+// ============================================================
+// REGISTRAR USUARIO
+// ============================================================
 
-// ----- Crear cuenta -----
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  if (!validate()) return;
+  // Comprobar que todos los datos sean correctos
+  if (!validate()) {
+    return;
+  }
 
+  // Crear objeto del usuario
   const user = {
     fullName: fields.fullName.value.trim(),
     email: fields.email.value.trim(),
@@ -82,25 +149,29 @@ form.addEventListener('submit', (e) => {
   };
 
   try {
-    // Guardar los datos del usuario
+
+    // Guardar información en el navegador
     localStorage.setItem('fiaoUser', JSON.stringify(user));
 
-    // Confirmar que el registro fue exitoso
+    // Mensaje de registro exitoso
     alert(
-      '¡Felicidades! 🎉\n\n' +
-      'Te has registrado correctamente en FIA\'O.\n' +
-      '¡Bienvenido a nuestra plataforma!'
+      "🎉 ¡FELICIDADES!\n\n" +
+      "Te has registrado correctamente en FIA'O.\n\n" +
+      "Tu cuenta ha sido creada exitosamente.\n" +
+      "¡Bienvenido a nuestra plataforma!"
     );
 
-    // Enviar al perfil
+    // Redirigir al perfil después de aceptar
     window.location.href = PROFILE_PAGE;
 
-  } catch (err) {
-    console.error('Error al guardar:', err);
+  } catch (error) {
+
+    console.error('Error al registrar usuario:', error);
 
     alert(
-      'No se pudo completar el registro. ' +
-      'Por favor, intenta nuevamente.'
+      'No se pudo completar tu registro.\n\n' +
+      'Por favor, verifica tu navegador e inténtalo nuevamente.'
     );
+
   }
 });
