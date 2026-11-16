@@ -86,5 +86,5 @@ form.addEventListener('submit', (e) => {
     console.error('No se pudo guardar en localStorage:', err);
   }
 
-  window.location.href = PROFILE_PAGE;
+  window.location.href = perfil.html;
 });
