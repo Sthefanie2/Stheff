@@ -66,12 +66,13 @@ Object.values(fields).forEach((input) => {
   input.addEventListener('input', () => clearError(input));
 });
 
+
 // ----- Crear cuenta -----
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+
   if (!validate()) return;
 
-  // Se guarda el usuario SIN la contraseña (profile.html lee esta clave)
   const user = {
     fullName: fields.fullName.value.trim(),
     email: fields.email.value.trim(),
@@ -81,10 +82,25 @@ form.addEventListener('submit', (e) => {
   };
 
   try {
+    // Guardar los datos del usuario
     localStorage.setItem('fiaoUser', JSON.stringify(user));
-  } catch (err) {
-    console.error('No se pudo guardar en localStorage:', err);
-  }
 
-  window.location.href = perfil.html;
+    // Confirmar que el registro fue exitoso
+    alert(
+      '¡Felicidades! 🎉\n\n' +
+      'Te has registrado correctamente en FIA\'O.\n' +
+      '¡Bienvenido a nuestra plataforma!'
+    );
+
+    // Enviar al perfil
+    window.location.href = PROFILE_PAGE;
+
+  } catch (err) {
+    console.error('Error al guardar:', err);
+
+    alert(
+      'No se pudo completar el registro. ' +
+      'Por favor, intenta nuevamente.'
+    );
+  }
 });
